@@ -23,6 +23,8 @@
     --teal-dim:#4a1520;
     --rule:#1c2333;
     --rule-strong:#2a3348;
+    --good:#34d399;
+    --good-dim:#103a2b;
     --nav-h:58px;
     --nav-gap:env(safe-area-inset-bottom,0px);
     color-scheme:dark;
@@ -57,6 +59,8 @@
     --teal-dim:#fce4e8;
     --rule:#e3dac8;
     --rule-strong:#cdc3ad;
+    --good:#15803d;
+    --good-dim:#dcfce7;
     color-scheme:light;
   }
 
@@ -84,7 +88,7 @@
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
 
   .site-header{position:sticky;top:0;z-index:120;background:rgba(5,7,11,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--rule);}
-  html[data-theme="light"] .site-header{background:rgba(255,246,229,.92);}
+  html[data-theme="light"] .site-header{background:var(--card);}
   .topbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;row-gap:10px;padding:20px 24px;max-width:1080px;margin:0 auto;}
   .logo-slot{display:flex;align-items:center;gap:10px;background:none;border:none;padding:4px;margin:-4px;border-radius:10px;cursor:pointer;text-align:left;transition:background .15s;}
   .logo-slot:hover{background:var(--card-hover);}
@@ -106,16 +110,19 @@
   .main-nav-link{font-size:13px;font-weight:500;color:var(--ink-dim);background:transparent;border:none;border-radius:999px;padding:8px 16px;cursor:pointer;transition:background .15s,color .15s;}
   .main-nav-link:hover{color:var(--ink);}
   .main-nav-link.active{background:var(--amber);color:#ffffff;font-weight:600;}
-  @media(max-width:900px){.main-nav{display:none;}}
+  @media(max-width:900px){.main-nav{display:none;}#profileBtn{display:none;}}
 
   .header-progress{display:flex;align-items:center;gap:10px;padding:0 24px 16px;max-width:1080px;margin:0 auto;}
   .hp-bar{flex:1;max-width:220px;height:4px;border-radius:3px;}
   .hp-bar .progress-bar-fill{background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:3px;}
-  .hp-pct{font-family:'Nunito',sans-serif;font-size:11px;color:var(--ink-faint);white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .hp-pct{display:none;}
   .hp-pct b{font-family:'Nunito',sans-serif;font-weight:600;font-size:13px;color:var(--teal);}
   @media(max-width:640px){
     .header-progress{padding:0 18px 14px;}
     .hp-bar{max-width:none;}
+    .topbar{flex-wrap:nowrap;gap:8px;padding:12px 14px;}
+    .topbar-actions{gap:6px;}
+    .icon-toggle{width:34px;height:34px;}
   }
 
   .home-search-wrap input{width:100%;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:14px 44px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--ink);transition:border-color .15s,background .15s;}
@@ -239,7 +246,7 @@
   .match-tile:active:not(:disabled){transform:scale(.96);}
   .match-tile.selected{border-color:var(--teal);background:var(--teal-dim);box-shadow:0 0 0 3px rgba(244,63,94,.25);}
   .match-tile.wrong{border-color:#b0495a;background:#3a1f24;color:#f0a5b0;}
-  .match-tile.solved{opacity:0;pointer-events:none;transform:scale(.85);}
+  .match-tile.solved{opacity:0;pointer-events:none;transform:scale(.85);background:var(--good-dim);border-color:var(--good);}
 
   @media(max-width:640px){
     .mode-btn{min-width:100%;}
@@ -341,6 +348,14 @@
     .wl-actions{grid-area:actions;}
   }
   .search-wrap{position:relative;flex:1;min-width:220px;}
+  .search-suggest{display:none;flex-wrap:wrap;gap:8px;margin:6px 2px 12px;}
+  .search-suggest.show{display:flex;}
+  .suggest-chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--rule);background:var(--panel);border-radius:999px;cursor:pointer;font-size:14px;transition:border-color .15s,background .15s;}
+  .suggest-chip:hover{background:rgba(251,113,133,.14);border-color:var(--teal);}
+  .suggest-chip .sw{font-weight:700;color:var(--ink);}
+  .suggest-chip .sru{color:var(--ink-faint);font-size:12px;}
+  .suggest-chip .schip{font-size:10px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.04em;}
+  .suggest-empty{display:block;width:100%;padding:8px 2px;color:var(--ink-faint);font-size:13px;}
   .search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:var(--ink-faint);pointer-events:none;}
   #search{width:100%;background:var(--panel);border:1px solid var(--rule);color:var(--ink);font-family:'Nunito',sans-serif;font-size:14px;padding:12px 16px 12px 38px;border-radius:8px;outline:none;transition:border-color .15s;}
   #search:focus{border-color:var(--teal);}
@@ -511,6 +526,9 @@
   #quizView{display:none;min-height:calc(100vh - 140px);padding-top:8px;}
   .quiz-progress-label{font-family:'Nunito',sans-serif;font-size:12px;letter-spacing:.04em;color:var(--ink-faint);}
 
+  
+  
+
   .quiz-stage{max-width:520px;margin:40px auto 60px;display:flex;flex-direction:column;align-items:center;}
   .quiz-question{text-align:center;margin-bottom:34px;display:flex;flex-direction:column;align-items:center;gap:10px;}
   .quiz-lvl-badge{padding:4px 12px;border-radius:20px;font-family:'Nunito',sans-serif;font-size:11px;letter-spacing:.06em;margin-bottom:2px;}
@@ -522,7 +540,7 @@
   .quiz-opt:hover:not(:disabled){border-color:var(--rule-strong);background:var(--card-hover);}
   .quiz-opt:active:not(:disabled){transform:scale(.98);}
   .quiz-opt:disabled{cursor:default;}
-  .quiz-opt.correct{border-color:var(--teal);background:var(--teal-dim);color:var(--ink);}
+  .quiz-opt.correct{border-color:var(--good);background:var(--good-dim);color:var(--ink);}
   .quiz-opt.wrong{border-color:#b0495a;background:#3a1f24;color:#f0a5b0;}
   .quiz-opt.correct{animation:pulseOk .35s ease;}
   .quiz-opt.wrong{animation:shakeX .32s ease;}
@@ -959,6 +977,37 @@
   #confetti{position:fixed;inset:0;pointer-events:none;z-index:999;overflow:hidden;}
   .cf{position:absolute;top:-24px;width:11px;height:16px;border-radius:3px;animation:confFall linear forwards;}
   @keyframes confFall{to{transform:translateY(108vh) rotate(760deg);}}
+  .lk-sug{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:10px 12px;margin-bottom:8px;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .15s,background .15s;}
+  .lk-sug:hover{background:rgba(251,113,133,.12);border-color:var(--teal);}
+  .lk-sug-w{font-weight:700;font-size:15px;}
+  .lk-sug-ru{color:var(--ink-faint);font-size:13px;}
+  .lk-sug-lvl{margin-left:auto;font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.04em;}
+  .srch-box{background:linear-gradient(135deg,#ef3b3b,#b3121b);border:none;box-shadow:0 26px 52px -22px rgba(150,20,20,.6);border-radius:24px;padding:30px 32px;margin:124px 0 144px;color:#fff;position:relative;z-index:10;}
+  .dict-inner{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:center;}
+  .dict-text{min-width:0;}
+  .dict-eyebrow{display:inline-block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:rgba(255,255,255,.92);background:rgba(255,255,255,.16);padding:6px 12px;border-radius:999px;margin-bottom:14px;}
+  .dict-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:clamp(22px,3.2vw,34px);line-height:1.12;margin:0 0 14px;color:#fff;letter-spacing:.01em;}
+  .dict-desc{margin:0 0 18px;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.86);max-width:46ch;}
+  .dict-stats{display:flex;gap:30px;flex-wrap:wrap;}
+  .dict-stat{display:flex;flex-direction:column;line-height:1.1;}
+  .dict-stat-val{font-size:32px;font-weight:800;color:#fff;font-family:'Unbounded',sans-serif;}
+  .dict-stat-lbl{font-size:12px;color:rgba(255,255,255,.78);margin-top:4px;}
+  .dict-search{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 22px 44px -22px rgba(0,0,0,.5);min-width:0;position:relative;}
+  .dict-search .lk-entry{position:absolute;top:calc(100% + 8px);left:0;right:0;z-index:60;margin:0;display:none;background:var(--card);border:1px solid var(--rule);border-radius:14px;box-shadow:0 26px 52px -22px rgba(0,0,0,.55);max-height:360px;overflow:auto;}
+  .dict-search .lk-entry.show{display:block;}
+  .lk-inside{display:none;margin:18px 0 0;max-height:340px;overflow:auto;}
+  .lk-inside.show{display:block;}
+  .dict-block-title{font-family:'Unbounded',sans-serif;font-weight:800;font-size:clamp(24px,3.4vw,36px);line-height:1.1;margin:0 0 18px;color:#fff;letter-spacing:.01em;}
+  .dict-search-label{display:block;font-family:'Unbounded',sans-serif;font-weight:600;font-size:14px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 8px;}
+  .srch-box .lk-row{margin:0 0 4px;padding:9px 9px 9px 16px;background:var(--panel);border:1.5px solid var(--rule);}
+  .srch-box .lk-row:focus-within{border-color:#ff8a8a;box-shadow:0 0 0 4px rgba(225,40,40,.32);}
+  .srch-box .lk-row input{font-size:17px;}
+  .dict-search .lk-row button{background:linear-gradient(135deg,#ff5b52,#c62828);box-shadow:0 8px 16px -8px rgba(198,40,40,.55);}
+  @media (max-width:780px){ .dict-inner{grid-template-columns:1fr;gap:22px;} }
+  @media (max-width:1020px){ .srch-box{margin:26px 0 28px;} .dict-inner{grid-template-columns:1fr;gap:22px;} }
+  @media (max-width:780px){ .srch-box{margin:22px 0 26px;padding:26px 22px;} .dict-block-title{font-size:clamp(22px,6vw,28px);} }
+  @media (max-width:640px){ .srch-box{margin:18px 0 24px;padding:22px 16px;} .dict-search .lk-entry{max-height:62vh;} .dict-stats{gap:22px;} .dict-stat-val{font-size:27px;} }
+  @media (max-width:420px){ .srch-box .lk-row{flex-wrap:wrap;} .srch-box .lk-row button{flex:1 1 100%;} }
 </style>
 </head>
 <body>
@@ -978,6 +1027,7 @@
       <button type="button" class="main-nav-link active" data-nav="home">Главная</button>
       <button type="button" class="main-nav-link" data-nav="library">Все слова</button>
       <button type="button" class="main-nav-link" data-nav="quiz">Тренировка</button>
+      
     </nav>
     <span class="chip-res">🔥<b id="hdrStreak">0</b></span>
       <span class="chip-res xp-chip"><i class="xp-mini" style="display:inline-flex;"><i id="hdrXpFill" style="width:0%"></i></i><b id="hdrPct">0%</b></span>
@@ -989,10 +1039,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </button>
     </div>
-  </div>
-  <div class="header-progress">
-    <span class="progress-bar hp-bar"><span class="progress-bar-fill" id="opFill" style="width:0%"></span></span>
-    <span class="hp-pct"><b id="opPctNum">0%</b> · <span id="opCount">0 / 0</span></span>
   </div>
 </header>
 
@@ -1008,9 +1054,7 @@
         <h1 class="greet-hi" id="greetHi">Добрый день</h1>
       </div>
       <div class="greet-stats">
-        <span class="gs-chip" title="Дней подряд">🔥 <b id="greetStreak">0</b></span>
         <span class="gs-chip" title="Выучено слов">📚 <b id="greetLearned">0</b></span>
-        <span class="gs-chip" title="Общий прогресс"><b id="greetPct">0%</b></span>
         <span class="gs-chip" id="greetLvlChip" title="Ваш уровень" style="display:none;">🎓 <b id="greetLvl">—</b></span>
       </div>
     </header>
@@ -1039,13 +1083,34 @@
     </article>
 
     <div class="tile srch-box">
-      <span class="tile-cap">Англо-русский словарь</span>
-      <div class="lk-row">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input id="homeSearch" type="text" placeholder="например, house или дом…" autocomplete="off" aria-label="Введите слово для поиска">
-        <button type="button" id="lookupBtn">Найти</button>
+      <h2 class="dict-block-title">Поиск слов</h2>
+      <div class="dict-inner">
+        <div class="dict-text">
+          <span class="dict-eyebrow">Словарь <span class="dict-badge" id="dictBadge">· … слов</span></span>
+          <h2 class="dict-title">Учи английский так же быстро, как открываешь словарь</h2>
+          <p class="dict-desc">Вводи слово на русском или английском — получай перевод, транскрипцию и живой пример употребления в предложении за секунду.</p>
+          <div class="dict-stats">
+            <div class="dict-stat">
+              <span class="dict-stat-val" id="statWords">—</span>
+              <span class="dict-stat-lbl">слов в базе</span>
+            </div>
+            <div class="dict-stat">
+              <span class="dict-stat-val" id="statExamples">—</span>
+              <span class="dict-stat-lbl">примеров фраз</span>
+            </div>
+          </div>
+        </div>
+        <div class="dict-search">
+          <span class="dict-search-label">Поиск слов</span>
+          <div class="lk-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input id="homeSearch" type="text" placeholder="например, house или дом…" autocomplete="off" aria-label="Введите слово для поиска">
+            <button type="button" id="lookupBtn">Найти</button>
+          </div>
+          <div class="lk-entry" id="entryCard" aria-live="polite"></div>
+        </div>
       </div>
-      <div class="lk-entry" id="entryCard" aria-live="polite"></div>
+      <div class="lk-entry lk-inside" id="entryInside" aria-live="polite"></div>
     </div>
 
     <section class="tile t-topics">
@@ -1230,6 +1295,7 @@
     <div class="selection-pill" id="selectionPill" style="display:none;"></div>
   </div>
   <nav class="jump-nav" id="jumpNav" aria-label="Быстрый переход по темам"></nav>
+  <div class="search-suggest" id="searchSuggest"></div>
   <div id="gridWrap"></div>
   <div class="empty" id="empty" style="display:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -1349,6 +1415,7 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Профиль
   </button>
+  
 </nav>
 
 <script>
@@ -1367,7 +1434,13 @@ const TOPICS = [
   {id:"работа", sticker:"🎓", name:"Работа и учёба"},
   {id:"путешествия", sticker:"🧭", name:"Путешествия"},
   {id:"природа", sticker:"⛅", name:"Природа и погода"},
-  {id:"эмоции", sticker:"🎭", name:"Эмоции и характер"}
+  {id:"эмоции", sticker:"🎭", name:"Эмоции и характер"},
+  {id:"здоровье", sticker:"💪", name:"Здоровье и тело"},
+  {id:"дом", sticker:"🏠", name:"Дом и быт"},
+  {id:"спорт", sticker:"⚽", name:"Спорт и хобби"},
+  {id:"техно", sticker:"💡", name:"Технологии"},
+  {id:"время", sticker:"⏰", name:"Время и даты"},
+  {id:"шопинг", sticker:"🛍️", name:"Покупки и вещи"}
 ];
 
 const WORDS = [
@@ -3899,7 +3972,74 @@ const WORDS = [
    {w:"maybe", ipa:"/ˈmeɪbi/", ru:"может быть", cat:"эмоции", lvl:"A1", ex:"Maybe tomorrow.", exru:"Может быть, завтра."},
    {w:"often", ipa:"/ˈɒfn/", ru:"часто", cat:"эмоции", lvl:"A2", ex:"We often go to the park.", exru:"Мы часто ходим в парк."},
    {w:"usually", ipa:"/ˈjuːʒuəli/", ru:"обычно", cat:"эмоции", lvl:"A2", ex:"I usually walk to work.", exru:"Обычно я иду на работу пешком."},
-   {w:"again", ipa:"/əˈɡeɪn/", ru:"снова, опять", cat:"эмоции", lvl:"A1", ex:"Say it again, please.", exru:"Повтори это, пожалуйста."}
+   {w:"again", ipa:"/əˈɡeɪn/", ru:"снова, опять", cat:"эмоции", lvl:"A1", ex:"Say it again, please.", exru:"Повтори это, пожалуйста."},
+  {w:"tooth", ipa:"/tuːθ/", ru:"зуб", cat:"здоровье", lvl:"A1", ex:"The tooth is aching badly.", exru:"Зуб сильно болит."},
+  {w:"blood", ipa:"/blʌd/", ru:"кровь", cat:"здоровье", lvl:"A2", ex:"Blood carries oxygen.", exru:"Кровь переносит кислород."},
+  {w:"heart", ipa:"/hɑːt/", ru:"сердце", cat:"здоровье", lvl:"A1", ex:"My heart beats fast.", exru:"Моё сердце бьётся быстро."},
+  {w:"breath", ipa:"/breθ/", ru:"дыхание", cat:"здоровье", lvl:"B1", ex:"Take a deep breath.", exru:"Сделай глубокий вдох."},
+  {w:"to breathe", ipa:"/briːð/", ru:"дышать", cat:"здоровье", lvl:"A1", ex:"Breathe slowly and calmly.", exru:"Дыши медленно и спокойно."},
+  {w:"health", ipa:"/helθ/", ru:"здоровье", cat:"здоровье", lvl:"A1", ex:"Health is more important than money.", exru:"Здоровье важнее денег."},
+  {w:"sick", ipa:"/sɪk/", ru:"больной", cat:"здоровье", lvl:"A1", ex:"I feel sick today.", exru:"Мне сегодня плохо."},
+  {w:"pain", ipa:"/peɪn/", ru:"боль", cat:"здоровье", lvl:"A1", ex:"She has a pain in her back.", exru:"У неё боль в спине."},
+  {w:"medicine", ipa:"/ˈmedsn/", ru:"лекарство", cat:"здоровье", lvl:"A1", ex:"Take the medicine after meals.", exru:"Прими лекарство после еды."},
+  {w:"hospital", ipa:"/ˈhɒspɪtl/", ru:"больница", cat:"здоровье", lvl:"A1", ex:"He stayed in hospital for a week.", exru:"Он провёл в больнице неделю."},
+  {w:"to rest", ipa:"/rest/", ru:"отдыхать", cat:"здоровье", lvl:"A1", ex:"Rest when you are tired.", exru:"Отдыхай, когда устал."},
+  {w:"to relax", ipa:"/rɪˈlæks/", ru:"расслабляться", cat:"здоровье", lvl:"B1", ex:"I relax in the evening.", exru:"Я расслабляюсь вечером."},
+  {w:"weight", ipa:"/weɪt/", ru:"вес", cat:"здоровье", lvl:"B1", ex:"He wants to lose weight.", exru:"Он хочет сбросить вес."},
+  {w:"exercise", ipa:"/ˈeksəsaɪz/", ru:"упражнение", cat:"здоровье", lvl:"B1", ex:"Morning exercise keeps you fit.", exru:"Утренняя зарядка держит в форме."},
+  {w:"to sneeze", ipa:"/sniːz/", ru:"чихать", cat:"здоровье", lvl:"A2", ex:"I sneeze when it is dusty.", exru:"Я чихаю, когда пыльно."},
+  {w:"allergy", ipa:"/ˈælədʒi/", ru:"аллергия", cat:"здоровье", lvl:"B2", ex:"I have an allergy to cats.", exru:"У меня аллергия на кошек."},
+  {w:"symptom", ipa:"/ˈsɪmptəm/", ru:"симптом", cat:"здоровье", lvl:"C1", ex:"A cough is a symptom.", exru:"Кашель — это симптом."},
+  {w:"vaccine", ipa:"/vækˈsiːn/", ru:"вакцина", cat:"здоровье", lvl:"C1", ex:"The vaccine protects you.", exru:"Вакцина защищает тебя."},
+  {w:"surgery", ipa:"/ˈsɜːdʒəri/", ru:"операция", cat:"здоровье", lvl:"B2", ex:"He needs surgery on his knee.", exru:"Ему нужна операция на колене."},
+  {w:"bed", ipa:"/bed/", ru:"кровать", cat:"дом", lvl:"A1", ex:"I made the bed this morning.", exru:"Я заправил кровать утром."},
+  {w:"furniture", ipa:"/ˈfɜːnɪtʃə/", ru:"мебель", cat:"дом", lvl:"B1", ex:"We bought new furniture.", exru:"Мы купили новую мебель."},
+  {w:"to clean", ipa:"/kliːn/", ru:"убирать", cat:"дом", lvl:"A1", ex:"Clean your room, please.", exru:"Убери свою комнату, пожалуйста."},
+  {w:"to repair", ipa:"/rɪˈpeə/", ru:"чинить", cat:"дом", lvl:"B1", ex:"He can repair the bike.", exru:"Он может починить велосипед."},
+  {w:"electricity", ipa:"/ɪˌlekˈtrɪsəti/", ru:"электричество", cat:"дом", lvl:"B1", ex:"The electricity went off.", exru:"Электричество отключилось."},
+  {w:"rent", ipa:"/rent/", ru:"аренда", cat:"дом", lvl:"B2", ex:"We pay rent every month.", exru:"Мы платим за аренду каждый месяц."},
+  {w:"plumbing", ipa:"/ˈplʌmɪŋ/", ru:"сантехника", cat:"дом", lvl:"B2", ex:"We called a plumbing service.", exru:"Мы вызвали сантехника."},
+  {w:"football", ipa:"/ˈfʊtbɔːl/", ru:"футбол", cat:"спорт", lvl:"A1", ex:"I watch football on weekends.", exru:"Я смотрю футбол по выходным."},
+  {w:"ball", ipa:"/bɔːl/", ru:"мяч", cat:"спорт", lvl:"A1", ex:"Throw the ball to me.", exru:"Брось мне мяч."},
+  {w:"team", ipa:"/tiːm/", ru:"команда", cat:"спорт", lvl:"A1", ex:"Our team played well.", exru:"Наша команда хорошо сыграла."},
+  {w:"game", ipa:"/ɡeɪm/", ru:"игра", cat:"спорт", lvl:"A1", ex:"Let us play a game.", exru:"Давай сыграем в игру."},
+  {w:"race", ipa:"/reɪs/", ru:"гонка", cat:"спорт", lvl:"B1", ex:"She won the race.", exru:"Она выиграла гонку."},
+  {w:"to score", ipa:"/skɔː/", ru:"забивать гол", cat:"спорт", lvl:"B2", ex:"He scored in the last minute.", exru:"Он забил на последней минуте."},
+  {w:"competition", ipa:"/ˌkɒmpəˈtɪʃn/", ru:"соревнование", cat:"спорт", lvl:"B1", ex:"The competition was fair.", exru:"Соревнование было честным."},
+  {w:"hobby", ipa:"/ˈhɒbi/", ru:"хобби", cat:"спорт", lvl:"A1", ex:"Painting is her hobby.", exru:"Рисование — её хобби."},
+  {w:"to skate", ipa:"/skeɪt/", ru:"кататься на коньках", cat:"спорт", lvl:"A2", ex:"They skate in winter.", exru:"Они катаются на коньках зимой."},
+  {w:"stadium", ipa:"/ˈsteɪdiəm/", ru:"стадион", cat:"спорт", lvl:"B1", ex:"The stadium was full.", exru:"Стадион был полон."},
+  {w:"marathon", ipa:"/ˈmærəθən/", ru:"марафон", cat:"спорт", lvl:"B2", ex:"She ran a marathon.", exru:"Она пробежала марафон."},
+  {w:"internet", ipa:"/ˈɪntənet/", ru:"интернет", cat:"техно", lvl:"A1", ex:"The internet is slow today.", exru:"Интернет сегодня медленный."},
+  {w:"website", ipa:"/ˈwebsaɪt/", ru:"веб-сайт", cat:"техно", lvl:"A2", ex:"Visit our website for news.", exru:"Зайди на наш сайт за новостями."},
+  {w:"to download", ipa:"/ˌdaʊnˈləʊd/", ru:"скачивать", cat:"техно", lvl:"B1", ex:"Download the app here.", exru:"Скачай приложение здесь."},
+  {w:"to click", ipa:"/klɪk/", ru:"нажимать", cat:"техно", lvl:"B1", ex:"Click the red button.", exru:"Нажми красную кнопку."},
+  {w:"software", ipa:"/ˈsɒftweə/", ru:"программное обеспечение", cat:"техно", lvl:"B2", ex:"This software is free.", exru:"Это ПО бесплатное."},
+  {w:"data", ipa:"/ˈdeɪtə/", ru:"данные", cat:"техно", lvl:"B2", ex:"We collected the data.", exru:"Мы собрали данные."},
+  {w:"to charge", ipa:"/tʃɑːdʒ/", ru:"заряжать", cat:"техно", lvl:"B1", ex:"Charge your laptop at night.", exru:"Заряди ноутбук ночью."},
+  {w:"app", ipa:"/æp/", ru:"приложение", cat:"техно", lvl:"A2", ex:"This app teaches languages.", exru:"Это приложение учит языкам."},
+  {w:"social media", ipa:"/ˈsəʊʃl ˈmiːdiə/", ru:"соцсети", cat:"техно", lvl:"B1", ex:"Social media connects people.", exru:"Соцсети соединяют людей."},
+  {w:"robot", ipa:"/ˈrəʊbɒt/", ru:"робот", cat:"техно", lvl:"B1", ex:"The robot cleans the floor.", exru:"Робот моет пол."},
+  {w:"wi-fi", ipa:"/ˈwaɪ faɪ/", ru:"вай-фай", cat:"техно", lvl:"A2", ex:"The wi-fi signal is weak.", exru:"Сигнал вай-фая слабый."},
+  {w:"artificial intelligence", ipa:"/ˌɑːtɪˈfɪʃl ɪnˈtelɪdʒəns/", ru:"искусственный интеллект", cat:"техно", lvl:"C1", ex:"AI writes simple texts.", exru:"ИИ пишет простые тексты."},
+  {w:"algorithm", ipa:"/ˈælɡərɪðəm/", ru:"алгоритм", cat:"техно", lvl:"C1", ex:"The algorithm learns fast.", exru:"Алгоритм быстро учится."},
+  {w:"hour", ipa:"/ˈaʊə/", ru:"час", cat:"время", lvl:"A1", ex:"Wait just one hour.", exru:"Подожди всего час."},
+  {w:"minute", ipa:"/ˈmɪnɪt/", ru:"минута", cat:"время", lvl:"A1", ex:"One minute, please.", exru:"Одну минуту, пожалуйста."},
+  {w:"birthday", ipa:"/ˈbɜːθdeɪ/", ru:"день рождения", cat:"время", lvl:"A1", ex:"Happy birthday to you!", exru:"С днём рождения тебя!"},
+  {w:"century", ipa:"/ˈsentʃəri/", ru:"век", cat:"время", lvl:"B2", ex:"This book is a century old.", exru:"Этой книге век."},
+  {w:"schedule", ipa:"/ˈʃedjuːl/", ru:"расписание", cat:"время", lvl:"B1", ex:"The train schedule changed.", exru:"Расписание поездов изменилось."},
+  {w:"decade", ipa:"/ˈdekeɪd/", ru:"десятилетие", cat:"время", lvl:"C1", ex:"A decade passed quickly.", exru:"Десятилетие пролетело быстро."},
+  {w:"price", ipa:"/praɪs/", ru:"цена", cat:"шопинг", lvl:"A1", ex:"The price is too high.", exru:"Цена слишком высокая."},
+  {w:"market", ipa:"/ˈmɑːkɪt/", ru:"рынок", cat:"шопинг", lvl:"A1", ex:"The market sells fresh fruit.", exru:"На рынке продают свежие фрукты."},
+  {w:"clothes", ipa:"/kləʊðz/", ru:"одежда", cat:"шопинг", lvl:"A1", ex:"These clothes are new.", exru:"Эта одежда новая."},
+  {w:"shoe", ipa:"/ʃuː/", ru:"обувь", cat:"шопинг", lvl:"A1", ex:"My left shoe is wet.", exru:"Моя левая туфля мокрая."},
+  {w:"size", ipa:"/saɪz/", ru:"размер", cat:"шопинг", lvl:"A2", ex:"What size do you wear?", exru:"Какой размер ты носишь?"},
+  {w:"to try on", ipa:"/traɪ ɒn/", ru:"примерять", cat:"шопинг", lvl:"B1", ex:"Try on the jacket first.", exru:"Сначала примерь куртку."},
+  {w:"receipt", ipa:"/rɪˈsiːt/", ru:"чек", cat:"шопинг", lvl:"B2", ex:"Keep the receipt, please.", exru:"Сохрани чек, пожалуйста."},
+  {w:"sale", ipa:"/seɪl/", ru:"распродажа", cat:"шопинг", lvl:"A1", ex:"Everything is on sale.", exru:"Всё на распродаже."},
+  {w:"discount", ipa:"/ˈdɪskaʊnt/", ru:"скидка", cat:"шопинг", lvl:"B2", ex:"I got a ten percent discount.", exru:"Я получил скидку десять процентов."},
+  {w:"fashion", ipa:"/ˈfæʃn/", ru:"мода", cat:"шопинг", lvl:"B2", ex:"Fashion changes every year.", exru:"Мода меняется каждый год."},
+  {w:"luxury", ipa:"/ˈlʌkʃəri/", ru:"роскошь", cat:"шопинг", lvl:"C1", ex:"A long bath is a luxury.", exru:"Долгая ванна — это роскошь."}
 ];
 
 WORDS.forEach((w,i)=>{ w._i = i; });
@@ -3974,6 +4114,8 @@ function levelDone(lvl){
   const list = WORDS.filter(w=>w.lvl===lvl);
   return list.length > 0 && countLearned(list) === list.length;
 }
+
+
 
 /* ---------- "difficult for me" star flag, independent of learned/unlearned ---------- */
 const STARRED_KEY = 'vocab_kartoteka_starred_v1';
@@ -4358,12 +4500,12 @@ function updateOverallProgress(){
   const total = WORDS.length;
   const learned = learnedWords.size;
   const pct = total ? Math.round(learned / total * 100) : 0;
-  document.getElementById('opPctNum').textContent = pct + '%';
+  const oph=document.getElementById('opPctNum'); if(oph) oph.textContent = pct + '%';
   const hs=document.getElementById('hdrStreak'); if(hs) hs.textContent = currentStreak();
   const hx=document.getElementById('hdrXpFill'); if(hx) hx.style.width = pct + '%';
   const hp=document.getElementById('hdrPct'); if(hp) hp.textContent = pct + '%';
-  document.getElementById('opFill').style.width = pct + '%';
-  document.getElementById('opCount').textContent = `${learned} / ${total} слов`;
+  const opf=document.getElementById('opFill'); if(opf) opf.style.width = pct + '%';
+  const opc=document.getElementById('opCount'); if(opc) opc.textContent = `${learned} / ${total} слов`;
 }
 
 function openLevelPicker(lvlId, keepScroll){
@@ -4460,6 +4602,7 @@ function openLibrary(opts){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  
   libEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('library');
@@ -4505,6 +4648,7 @@ function goHome(){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  
   homeEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   buildHome();
@@ -4637,6 +4781,7 @@ function openProfile(){
   document.getElementById('quizView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  
   document.getElementById('profileView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('profile');
@@ -4697,6 +4842,7 @@ function openQuizLevelPicker(){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizView').style.display = 'none';
   const mv0 = document.getElementById('matchView'); if(mv0) mv0.style.display = 'none';
+  
   document.getElementById('quizLevelPicker').style.display = 'block';
   setActiveBottomNav('quiz');
   wizReset();
@@ -4781,6 +4927,7 @@ function startQuiz(origin, explicitWords){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  
   document.getElementById('quizView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('quiz');
@@ -4892,6 +5039,7 @@ function startMatch(lvlId){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
+  
   document.getElementById('matchView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('quiz');
@@ -5504,17 +5652,70 @@ function setupJumpSpy(ids){
 
 const searchInput = document.getElementById('search');
 const searchClear = document.getElementById('searchClear');
+const searchSuggest = document.getElementById('searchSuggest');
 let searchTimer = null;
+function updateSuggestions(){
+  const q = query.trim().toLowerCase();
+  const qn = q.startsWith('to ') ? q.slice(3) : q;
+  if(!q){
+    searchSuggest.classList.remove('show');
+    searchSuggest.innerHTML = '';
+    return;
+  }
+  const matches = WORDS.filter(it =>
+    it.w.toLowerCase().includes(qn) || it.ru.toLowerCase().includes(q)
+  ).sort((a,b)=>{
+    const ai = a.w.toLowerCase().startsWith(qn) ? 0 : 1;
+    const bi = b.w.toLowerCase().startsWith(qn) ? 0 : 1;
+    return ai - bi;
+  }).slice(0, 12);
+  if(!matches.length){
+    searchSuggest.innerHTML = '<div class="suggest-empty">Ничего не найдено</div>';
+    searchSuggest.classList.add('show');
+    return;
+  }
+  searchSuggest.innerHTML = matches.map(it =>
+    '<button type="button" class="suggest-chip" data-word="'+it.w.replace(/"/g,'&quot;')+'">'+
+      '<span class="sw">'+it.w+'</span>'+
+      '<span class="sru">'+it.ru+'</span>'+
+      '<span class="schip">'+it.lvl+'</span>'+
+    '</button>'
+  ).join('');
+  searchSuggest.classList.add('show');
+}
+function applySuggestion(word){
+  searchInput.value = word;
+  query = word;
+  searchClear.classList.toggle('show', query.length > 0);
+  searchSuggest.classList.remove('show');
+  searchSuggest.innerHTML = '';
+  render();
+}
+searchSuggest.addEventListener('mousedown', function(e){
+  const item = e.target.closest('.suggest-chip');
+  if(!item) return;
+  e.preventDefault();
+  applySuggestion(item.dataset.word);
+});
+searchInput.addEventListener('keydown', function(e){
+  if(e.key === 'Escape'){ searchSuggest.classList.remove('show'); }
+});
+searchInput.addEventListener('blur', function(){
+  setTimeout(function(){ searchSuggest.classList.remove('show'); }, 150);
+});
 searchInput.addEventListener('input', function(e){
   query = e.target.value;
   searchClear.classList.toggle('show', query.length > 0);
   clearTimeout(searchTimer);
   searchTimer = setTimeout(render, 120);
+  updateSuggestions();
 });
 searchClear.addEventListener('click', function(){
   query = "";
   searchInput.value = "";
   searchClear.classList.remove('show');
+  searchSuggest.classList.remove('show');
+  searchSuggest.innerHTML = '';
   searchInput.focus();
   clearTimeout(searchTimer);
   render();
@@ -5564,6 +5765,7 @@ if(bottomNav){
       else if(view === 'library') openLibrary({});
       else if(view === 'quiz') openQuizLevelPicker();
       else if(view === 'profile') openProfile();
+      
       setActiveBottomNav(view);
     });
   });
@@ -5578,6 +5780,7 @@ if(mainNavEl){
       else if(v === 'library') openLibrary({});
       else if(v === 'quiz') openQuizLevelPicker();
       else if(v === 'profile') openProfile();
+      
     });
   });
 }
@@ -5635,18 +5838,25 @@ if(wizStartBtnEl){
 /* ---------- home lookup (auto EN/RU dictionary) ---------- */
 const lookupInput = document.getElementById('homeSearch');
 const lookupCard = document.getElementById('entryCard');
+const entryInside = document.getElementById('entryInside');
 const isCyr = s => /[\u0400-\u04ff]/i.test(s);
 const normRu = s => s.toLowerCase().replace(/ё/g, 'е');
 
 function lkEmpty(){
+  lookupCard.classList.remove('show');
+  entryInside.classList.remove('show'); entryInside.innerHTML='';
   lookupCard.innerHTML = `<p class="lk-empty">Начните вводить слово — например, <b>river</b> или <b>терпение</b>.</p>`;
 }
 function lkNotFound(q){
   const alt = isCyr(q) ? 'победа' : 'ocean';
+  entryInside.classList.remove('show'); entryInside.innerHTML='';
   lookupCard.innerHTML = `<p class="lk-empty">Слово «<b>${q}</b>» пока не в словаре. Попробуйте другое — например, <b>${alt}</b>.</p>`;
+  lookupCard.classList.add('show');
 }
 function lkEntry(item){
-  lookupCard.innerHTML = `
+  lookupCard.classList.remove('show'); lookupCard.innerHTML='';
+  entryInside.classList.add('show');
+  entryInside.innerHTML = `
     <div class="lk-top">
       <span class="lk-word">${dw(item)}${isVerbItem(item) ? " <span class=\"pos-tag\">гл.</span>" : ""}</span>
       <span class="lk-ipa">${item.ipa}</span>
@@ -5657,15 +5867,35 @@ function lkEntry(item){
     <button type="button" class="lk-open" id="lkOpenBtn">Открыть в библиотеке<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>`;
   document.getElementById('lkOpenBtn').addEventListener('click', ()=> openLibrary({ query: item.w }));
 }
+function lkList(items){
+  entryInside.classList.remove('show'); entryInside.innerHTML='';
+  lookupCard.classList.add('show');
+  lookupCard.innerHTML = items.map(it =>
+    '<button type="button" class="lk-sug" data-i="'+it._i+'">'+
+      '<span class="lk-sug-w">'+dw(it)+(isVerbItem(it)?' <span class="pos-tag">гл.</span>':'')+'</span>'+
+      '<span class="lk-sug-ru">'+it.ru+'</span>'+
+      '<span class="lk-sug-lvl">'+it.lvl+'</span>'+
+    '</button>'
+  ).join('');
+  lookupCard.querySelectorAll('.lk-sug').forEach(b=>{
+    b.addEventListener('click', ()=> lkEntry(WORDS[+b.dataset.i]));
+  });
+}
 function runLookup(){
   const raw = lookupInput.value.trim();
   if(!raw){ lkEmpty(); return; }
   const q = raw.toLowerCase();
   const field = isCyr(raw) ? 'ru' : 'w';
-  const needle = field === 'ru' ? normRu(q) : q.replace(/^to\s+/,"");
-  let match = WORDS.find(it => (field === 'ru' ? normRu(it.ru) : it.w.toLowerCase()).startsWith(needle));
-  if(!match) match = WORDS.find(it => (field === 'ru' ? normRu(it.ru) : it.w.toLowerCase()).includes(needle));
-  if(match){ lkEntry(match); } else { lkNotFound(raw); }
+  const needle = (field === 'ru' ? normRu(q) : q.replace(/^to\s+/,"")).trim();
+  if(!needle){ lkEmpty(); return; }
+  const val = it => (field === 'ru' ? normRu(it.ru) : it.w.toLowerCase().replace(/^to\s+/,"")).trim();
+  const starts = WORDS.filter(it => val(it).startsWith(needle));
+  const rest = WORDS.filter(it => !val(it).startsWith(needle) && val(it).includes(needle));
+  const list = starts.concat(rest).slice(0, 20);
+  if(!list.length){ lkNotFound(raw); return; }
+  const exact = list.find(it => val(it) === needle);
+  if(exact){ lkEntry(exact); return; }
+  lkList(list);
 }
 lookupInput.addEventListener('input', runLookup);
 const lookupBtnEl = document.getElementById('lookupBtn');
@@ -5673,6 +5903,15 @@ if(lookupBtnEl) lookupBtnEl.addEventListener('click', runLookup);
 lookupInput.addEventListener('keydown', (e)=>{
   if(e.key === 'Enter'){ e.preventDefault(); runLookup(); }
 });
+const statWords = document.getElementById('statWords');
+const statExamples = document.getElementById('statExamples');
+const dictBadge = document.getElementById('dictBadge');
+if(statWords) statWords.textContent = WORDS.length.toLocaleString('ru-RU');
+if(statExamples){
+  const exCount = WORDS.filter(w => w.ex && String(w.ex).trim().length).length;
+  statExamples.textContent = exCount.toLocaleString('ru-RU');
+}
+if(dictBadge) dictBadge.textContent = '· ' + WORDS.length.toLocaleString('ru-RU') + ' слов';
 lkEmpty();
 
 const themeToggle = document.getElementById('themeToggle');
