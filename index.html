@@ -763,6 +763,88 @@
   .lk-ai-spinner{width:16px;height:16px;border-radius:50%;border:2px solid var(--rule-strong);border-top-color:var(--teal);animation:lkSpin .7s linear infinite;flex-shrink:0;}
   @keyframes lkSpin{to{transform:rotate(360deg);}}
   .lk-ai-disclaimer{font-size:11.5px;color:var(--ink-faint);margin:10px 0 0;line-height:1.4;}
+
+  /* ---------- Мой список ---------- */
+  .mylist-sub{color:var(--ink-dim);font-size:13.5px;max-width:520px;margin:0;line-height:1.5;}
+  .mylist-actions{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 26px;}
+  .mylist-review-btn{background:var(--teal);box-shadow:0 10px 22px -10px rgba(15,118,110,.5);}
+  .mylist-review-btn:disabled{opacity:.45;cursor:default;box-shadow:none;}
+  .mylist-hint{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-faint);margin:-14px 0 20px;letter-spacing:.01em;}
+  .mylist-hint .mh-count{font-family:'Nunito',sans-serif;font-weight:700;color:var(--teal);}
+  .mylist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+  .mylist-card{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:18px 16px;overflow:hidden;opacity:0;transform:translateY(14px) scale(.97);animation:mylistIn .3s cubic-bezier(.2,.8,.3,1) forwards;transform-origin:top center;}
+  .mylist-card::before{content:'';position:absolute;left:0;top:0;width:100%;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));opacity:0;transition:opacity .22s;}
+  .mylist-card::after{content:'';position:absolute;inset:0;border-radius:16px;background:radial-gradient(120% 60% at 50% 0%,rgba(251,113,133,.06),transparent 60%);opacity:0;transition:opacity .22s;pointer-events:none;}
+  .mylist-card:hover::before,.mylist-card:hover::after{opacity:1;}
+  .mylist-card{transition:transform .18s,box-shadow .18s,border-color .18s,opacity .22s,filter .22s;}
+  .mylist-card:hover{transform:translateY(-4px) scale(1.02);border-color:var(--teal-dim);box-shadow:0 16px 30px -14px rgba(251,113,133,.35),0 1px 0 rgba(0,0,0,.15);}
+  html[data-theme="light"] .mylist-card:hover{border-color:rgba(225,29,72,.35);box-shadow:0 16px 30px -14px rgba(225,29,72,.28);}
+  .mylist-card:active{transform:translateY(-1px) scale(.99);}
+  .mylist-card.removing{opacity:0;transform:scale(.82) translateY(8px);filter:blur(3px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,filter .2s ease;}
+  .mylist-card-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:var(--ink);margin-bottom:4px;padding-right:20px;line-height:1.2;}
+  .mylist-card-word:hover .mylist-w-speak{color:var(--teal);}
+  .mylist-card-ru{color:var(--ink-dim);font-size:14px;}
+  .mylist-del{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;border:none;background:var(--card-hover);color:var(--ink-faint);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,color .15s,transform .15s;z-index:2;}
+  .mylist-del:hover{background:var(--amber-dim);color:var(--amber);transform:rotate(90deg) scale(1.08);}
+  .mylist-del:active{transform:rotate(90deg) scale(.9);}
+  .mylist-elv{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:'Nunito',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:20px;}
+  .mylist-elv b{font-weight:800;}
+  .mylist-elv-e{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.85;}
+  .mylist-elv.lvl-A1{background:#4a2420;color:#ff9e93;} .mylist-elv.lvl-A2{background:#451e1a;color:#ff7a6b;}
+  .mylist-elv.lvl-B1{background:#3f1a1f;color:#f2545f;} .mylist-elv.lvl-B2{background:#3d1420;color:#e0384f;}
+  .mylist-elv.lvl-C1{background:#380f1d;color:#c22a4a;} .mylist-elv.lvl-C2{background:#300b18;color:#9c1f42;}
+  .mylist-ai-badge{display:inline-block;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);background:var(--teal-dim);padding:2px 8px;border-radius:7px;font-weight:800;margin-bottom:8px;}
+  .mylist-empty{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:60px 20px;color:var(--ink-faint);animation:mylistIn .4s cubic-bezier(.2,.8,.3,1);}
+  .mylist-empty-icon{font-size:38px;display:inline-block;animation:mylistFloat 3s ease-in-out infinite;filter:drop-shadow(0 6px 12px rgba(251,113,133,.25));}
+  .mylist-empty p{max-width:340px;margin:0;font-size:13.5px;line-height:1.5;}
+  @keyframes mylistIn{to{opacity:1;transform:translateY(0) scale(1);}}
+  @keyframes mylistFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-10px) rotate(4deg);}}
+  @keyframes mylistFlashIn{from{opacity:0;transform:scale(.92) translateY(14px);}to{opacity:1;transform:scale(1) translateY(0);}}
+  @keyframes mylistFlashOut{from{opacity:1;transform:translateX(0) scale(1);}to{opacity:0;transform:translateX(-40px) scale(.94);}}
+  @keyframes mylistPop{0%{opacity:0;transform:scale(.7);}100%{opacity:1;transform:scale(1);}}
+  @keyframes mylistSlideIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  .mylist-add-box{width:min(440px,92vw);}
+  .mylist-add-search{display:flex;gap:8px;margin:14px 0 4px;}
+  .mylist-add-search input{flex:1;background:var(--bg);border:1px solid var(--rule-strong);border-radius:12px;padding:12px 14px;font-family:'Nunito',sans-serif;font-size:14px;color:var(--ink);}
+  .mylist-add-search input:focus{outline:none;border-color:var(--teal);}
+  .mylist-add-search button{width:44px;height:44px;flex-shrink:0;border-radius:12px;border:none;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+  .mylist-add-result{margin-top:14px;max-height:280px;overflow-y:auto;display:flex;flex-direction:column;gap:8px;}
+  .mylist-pick{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:10px 14px;cursor:pointer;text-align:left;transition:border-color .15s,background .15s;}
+  .mylist-pick:hover{border-color:var(--teal);background:var(--card-hover);}
+  .mylist-pick-w{font-family:'Nunito',sans-serif;font-weight:700;color:var(--ink);font-size:14px;}
+  .mylist-pick-ru{color:var(--ink-dim);font-size:13px;flex:1;}
+  .mylist-pick-add{color:var(--teal);font-size:12px;font-weight:700;flex-shrink:0;}
+  .mylist-ai-result{background:var(--card);border:1px solid var(--rule);border-radius:14px;padding:16px;text-align:center;}
+  .mylist-ai-pair{font-family:'Nunito',sans-serif;font-size:16px;color:var(--ink);margin:8px 0 14px;}
+  .mylist-ai-pair b{font-weight:800;}
+
+  .mylist-review-inner{width:min(480px,100%);text-align:center;}
+  .game-back{display:inline-flex;align-items:center;gap:7px;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink-dim);background:var(--card);border:1px solid var(--rule);border-radius:999px;padding:9px 16px;cursor:pointer;letter-spacing:.01em;transition:border-color .15s,color .15s,transform .15s,box-shadow .15s,background .15s;}
+  .game-back svg{width:14px;height:14px;transition:transform .2s;}
+  .game-back:hover{border-color:var(--rule-strong);color:var(--ink);background:var(--card-hover);box-shadow:0 6px 16px -8px rgba(0,0,0,.35);}
+  .game-back:hover svg{transform:translateX(-2px);}
+  .game-back:active{transform:scale(.95);}
+  .mylist-flash{margin:20px 0;}
+  .mylist-flash-card{position:relative;width:100%;min-height:190px;perspective:1200px;cursor:pointer;animation:mylistFlashIn .4s cubic-bezier(.2,.8,.3,1);}
+  .mylist-flash-card-inner{position:relative;width:100%;height:100%;min-height:190px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.15,.2,1);}
+  .mylist-flash-card.flipped .mylist-flash-card-inner{transform:rotateY(180deg);}
+  .mylist-flash-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:40px 24px;}
+  .mylist-flash-face:hover{border-color:var(--teal);}
+  .mylist-flash-face.back{transform:rotateY(180deg);background:var(--panel);border-color:var(--teal-dim);}
+  .mylist-flash-card.flipped:hover .mylist-flash-face{border-color:var(--teal-dim);}
+  .mylist-flash-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:30px;color:var(--ink);}
+  .mylist-flash-ru{font-size:20px;color:var(--teal);font-weight:700;}
+  .mylist-flash-hint{font-size:12px;color:var(--ink-faint);opacity:.85;}
+  .mylist-flash-card.leaving{animation:mylistFlashOut .18s ease forwards;pointer-events:none;}
+  .mylist-review-actions{display:flex;gap:10px;justify-content:center;}
+  .mylist-done{font-family:'Nunito',sans-serif;font-size:20px;font-weight:700;color:var(--ink);padding:50px 20px;animation:mylistPop .5s cubic-bezier(.2,.9,.3,1.3);}
+  .ml-progress-anim{animation:mylistSlideIn .3s cubic-bezier(.2,.8,.3,1);}
+  @media(max-width:560px){
+    .mylist-grid{grid-template-columns:repeat(2,1fr);}
+    .mylist-actions{flex-direction:column;}
+    .mylist-actions .start-btn{width:100%;justify-content:center;}
+  }
   .lk-open{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-weight:600;font-size:12.5px;color:var(--amber);background:none;border:none;cursor:pointer;padding:0;}
   .lk-open:hover{text-decoration:underline;}
 
@@ -1044,6 +1126,7 @@
       <button type="button" class="main-nav-link active" data-nav="home">Главная</button>
       <button type="button" class="main-nav-link" data-nav="library">Все слова</button>
       <button type="button" class="main-nav-link" data-nav="quiz">Тренировка</button>
+      <button type="button" class="main-nav-link" data-nav="mylist">Мой список</button>
     </nav>
     <span class="chip-res">🔥<b id="hdrStreak">0</b></span>
       <span class="chip-res xp-chip"><i class="xp-mini" style="display:inline-flex;"><i id="hdrXpFill" style="width:0%"></i></i><b id="hdrPct">0%</b></span>
@@ -1333,6 +1416,37 @@
   <div class="match-stage" id="matchStage"></div>
 </div>
 
+<div id="mylistView" class="wrap">
+  <div class="lib-header">
+    <div>
+      <span class="tile-cap">Мой список</span>
+      <h2 class="tile-title" style="margin:4px 0 6px;">Слова для повторения</h2>
+      <p class="mylist-sub">Добавляйте слова, которые не хотите забыть — и заходите повторять их, например, раз в день.</p>
+    </div>
+  </div>
+  <div class="mylist-actions">
+    <button type="button" class="start-btn" id="mylistAddBtn">+ Добавить слово</button>
+    <button type="button" class="start-btn mylist-review-btn" id="mylistReviewBtn">▶ Повторить <span id="mylistReviewCount"></span></button>
+  </div>
+  <div class="mylist-grid" id="mylistGrid"></div>
+  <div class="mylist-empty" id="mylistEmpty">
+    <span class="mylist-empty-icon">📌</span>
+    <p>Пока пусто. Добавьте первое слово — и оно будет ждать вас здесь для повторения.</p>
+  </div>
+</div>
+
+<div id="mylistReviewOv" class="onboard" hidden>
+  <div class="onboard-inner mylist-review-inner">
+    <button type="button" class="game-back" id="mylistReviewClose">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Закрыть
+    </button>
+    <p class="quiz-progress-label" id="mylistReviewProgress"></p>
+    <div class="mylist-flash" id="mylistFlash"></div>
+    <div class="mylist-review-actions" id="mylistReviewActions"></div>
+  </div>
+</div>
+
 
 </main>
 
@@ -1376,6 +1490,22 @@
     <div class="modal-actions">
       <button type="button" class="tab" id="modalCancel">Отмена</button>
       <button type="button" class="start-btn" id="modalOk">Подтвердить</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-ov" id="mylistAddModal" hidden>
+  <div class="modal-box mylist-add-box">
+    <span class="tile-cap">Добавить слово</span>
+    <div class="mylist-add-search">
+      <input id="mylistAddInput" type="text" placeholder="Слово на английском или русском" autocomplete="off">
+      <button type="button" id="mylistAddSearchBtn" aria-label="Найти">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </button>
+    </div>
+    <div id="mylistAddResult" class="mylist-add-result"></div>
+    <div class="modal-actions">
+      <button type="button" class="tab" id="mylistAddCancel">Закрыть</button>
     </div>
   </div>
 </div>
@@ -1427,6 +1557,10 @@
   <button type="button" data-view="library" aria-label="Словарь">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
     Словарь
+  </button>
+  <button type="button" data-view="mylist" aria-label="Мой список">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+    Список
   </button>
   <button type="button" data-view="profile" aria-label="Профиль">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -4593,6 +4727,7 @@ function openLevelPicker(lvlId, keepScroll){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  const mlv4 = document.getElementById('mylistView'); if(mlv4) mlv4.style.display = 'none';
   pickerEl.style.display = 'block';
   setActiveBottomNav('library');
   if(!keepScroll) window.scrollTo({top:0, behavior:'smooth'});
@@ -4616,6 +4751,7 @@ function openLibrary(opts){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  const mlv5 = document.getElementById('mylistView'); if(mlv5) mlv5.style.display = 'none';
   libEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('library');
@@ -4661,6 +4797,7 @@ function goHome(){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  const mlv6 = document.getElementById('mylistView'); if(mlv6) mlv6.style.display = 'none';
   homeEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   buildHome();
@@ -4793,9 +4930,24 @@ function openProfile(){
   document.getElementById('quizView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  const mlv = document.getElementById('mylistView'); if(mlv) mlv.style.display = 'none';
   document.getElementById('profileView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('profile');
+}
+
+function openMyList(){
+  homeEl.style.display = 'none';
+  libEl.style.display = 'none';
+  pickerEl.style.display = 'none';
+  document.getElementById('quizView').style.display = 'none';
+  document.getElementById('profileView').style.display = 'none';
+  document.getElementById('quizLevelPicker').style.display = 'none';
+  const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  document.getElementById('mylistView').style.display = 'block';
+  window.scrollTo({top:0, behavior:'smooth'});
+  setActiveBottomNav('mylist');
+  renderMyList();
 }
 
 /* ---------- quiz / training mode ---------- */
@@ -4853,6 +5005,7 @@ function openQuizLevelPicker(){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizView').style.display = 'none';
   const mv0 = document.getElementById('matchView'); if(mv0) mv0.style.display = 'none';
+  const mlv0 = document.getElementById('mylistView'); if(mlv0) mlv0.style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'block';
   setActiveBottomNav('quiz');
   wizReset();
@@ -4937,6 +5090,7 @@ function startQuiz(origin, explicitWords){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
+  const mlv1 = document.getElementById('mylistView'); if(mlv1) mlv1.style.display = 'none';
   document.getElementById('quizView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('quiz');
@@ -5048,6 +5202,7 @@ function startMatch(lvlId){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
+  const mlv2 = document.getElementById('mylistView'); if(mlv2) mlv2.style.display = 'none';
   document.getElementById('matchView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('quiz');
@@ -5179,6 +5334,7 @@ function startTyping(lvlId){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mvT = document.getElementById('matchView'); if(mvT) mvT.style.display = 'none';
+  const mlv3 = document.getElementById('mylistView'); if(mlv3) mlv3.style.display = 'none';
   document.getElementById('quizView').style.display = 'block';
   window.scrollTo({top: 0, behavior: 'smooth'});
   setActiveBottomNav('quiz');
@@ -5773,6 +5929,7 @@ if(bottomNav){
       if(view === 'home') goHome();
       else if(view === 'library') openLibrary({});
       else if(view === 'quiz') openQuizLevelPicker();
+      else if(view === 'mylist') openMyList();
       else if(view === 'profile') openProfile();
       setActiveBottomNav(view);
     });
@@ -5787,6 +5944,7 @@ if(mainNavEl){
       if(v === 'home') goHome();
       else if(v === 'library') openLibrary({});
       else if(v === 'quiz') openQuizLevelPicker();
+      else if(v === 'mylist') openMyList();
       else if(v === 'profile') openProfile();
     });
   });
@@ -5980,6 +6138,254 @@ if(lookupBtnEl) lookupBtnEl.addEventListener('click', ()=> runLookup(true));
 lookupInput.addEventListener('keydown', (e)=>{
   if(e.key === 'Enter'){ e.preventDefault(); runLookup(true); }
 });
+
+/* ---------- Мой список: personal review list ---------- */
+const MYLIST_KEY = 'lexio_mylist_v1';
+function loadMyList(){ try{ return JSON.parse(localStorage.getItem(MYLIST_KEY)) || []; }catch(e){ return []; } }
+function saveMyList(){ try{ localStorage.setItem(MYLIST_KEY, JSON.stringify(myList)); }catch(e){} }
+let myList = loadMyList();
+
+function findWordLevel(en){
+  const lower = en.toLowerCase();
+  const entry = WORDS.find(d => d.w.toLowerCase() === lower);
+  return entry ? entry.lvl : null;
+}
+
+function renderMyList(){
+  const grid = document.getElementById('mylistGrid');
+  const empty = document.getElementById('mylistEmpty');
+  const countEl = document.getElementById('mylistReviewCount');
+  const reviewBtn = document.getElementById('mylistReviewBtn');
+  if(!grid) return;
+  if(!myList.length){
+    grid.innerHTML = '';
+    grid.style.display = 'none';
+    if(empty) empty.style.display = 'flex';
+    if(countEl) countEl.textContent = '';
+    if(reviewBtn) reviewBtn.disabled = true;
+    return;
+  }
+  if(empty) empty.style.display = 'none';
+  grid.style.display = 'grid';
+  if(reviewBtn) reviewBtn.disabled = false;
+  if(countEl) countEl.textContent = '(' + myList.length + ')';
+  grid.innerHTML = myList.map((item, i) => {
+    const lvl = findWordLevel(item.en);
+    const lvlClass = lvl ? ' lvl-' + lvl : '';
+    const badgeHtml = lvl ? `<div class="mylist-elv${lvlClass}" style="color:inherit"><span class="mylist-elv-e"></span>${lvl}</div>` : '';
+    const aiBadge = item.source === 'ai' ? '<span class="mylist-ai-badge">✨ AI</span>' : '';
+    const delay = Math.min(i * 28, 400);
+    return `
+      <div class="mylist-card" style="animation-delay:${delay}ms">
+        <button type="button" class="mylist-del" data-id="${item.id}" aria-label="Удалить слово">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        ${aiBadge}
+        <div class="mylist-card-word">${item.en}</div>
+        <div class="mylist-card-ru">${item.ru}</div>
+        ${badgeHtml}
+      </div>
+    `;
+  }).join('');
+  grid.querySelectorAll('.mylist-del').forEach(btn=>{
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const card = btn.closest('.mylist-card');
+      if(card){
+        card.classList.add('removing');
+        setTimeout(()=>{
+          myList = myList.filter(w => w.id !== btn.dataset.id);
+          saveMyList();
+          renderMyList();
+        }, 200);
+      } else {
+        myList = myList.filter(w => w.id !== btn.dataset.id);
+        saveMyList();
+        renderMyList();
+      }
+    });
+  });
+}
+
+function addToMyList(en, ru, source){
+  const exists = myList.some(w => w.en.toLowerCase() === en.toLowerCase());
+  if(exists){ showToast('📌', 'Уже в списке', en + ' — это слово уже добавлено'); return; }
+  myList.unshift({ id: 'w' + Date.now() + Math.random().toString(36).slice(2,7), en, ru, source: source || 'dict', ts: Date.now() });
+  saveMyList();
+  renderMyList();
+  showToast('✅', 'Добавлено', en + ' теперь в «Моём списке»');
+}
+
+/* -- add-word modal -- */
+const mylistAddModal = document.getElementById('mylistAddModal');
+const mylistAddInput = document.getElementById('mylistAddInput');
+const mylistAddResult = document.getElementById('mylistAddResult');
+
+function openMylistAddModal(){
+  if(!mylistAddModal) return;
+  mylistAddModal.hidden = false;
+  requestAnimationFrame(()=> mylistAddModal.classList.add('show'));
+  mylistAddInput.value = '';
+  mylistAddResult.innerHTML = '';
+  setTimeout(()=> mylistAddInput.focus(), 50);
+}
+function closeMylistAddModal(){
+  if(!mylistAddModal) return;
+  mylistAddModal.classList.remove('show');
+  setTimeout(()=>{ mylistAddModal.hidden = true; }, 190);
+}
+const mylistAddBtn = document.getElementById('mylistAddBtn');
+if(mylistAddBtn) mylistAddBtn.addEventListener('click', openMylistAddModal);
+const mylistAddCancel = document.getElementById('mylistAddCancel');
+if(mylistAddCancel) mylistAddCancel.addEventListener('click', closeMylistAddModal);
+if(mylistAddModal) mylistAddModal.addEventListener('click', (e)=>{ if(e.target === mylistAddModal) closeMylistAddModal(); });
+
+function mylistSearchLocal(raw){
+  const q = raw.toLowerCase().trim();
+  const field = isCyr(raw) ? 'ru' : 'w';
+  const needle = (field === 'ru' ? normRu(q) : q.replace(/^to\s+/,"")).trim();
+  if(!needle) return [];
+  const val = it => (field === 'ru' ? normRu(it.ru) : it.w.toLowerCase().replace(/^to\s+/,"")).trim();
+  const starts = WORDS.filter(it => val(it).startsWith(needle));
+  const rest = WORDS.filter(it => !val(it).startsWith(needle) && val(it).includes(needle));
+  return starts.concat(rest).slice(0, 6);
+}
+
+function renderMylistLocalMatches(items){
+  mylistAddResult.innerHTML = items.map((it,i) => `
+    <button type="button" class="mylist-pick" data-i="${it._i}">
+      <span class="mylist-pick-w">${it.w}</span>
+      <span class="mylist-pick-ru">${it.ru}</span>
+      <span class="mylist-pick-add">+ Добавить</span>
+    </button>`).join('');
+  mylistAddResult.querySelectorAll('.mylist-pick').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const it = WORDS[+btn.dataset.i];
+      addToMyList(it.w, it.ru, 'dict');
+      closeMylistAddModal();
+    });
+  });
+}
+
+async function mylistAiTranslate(raw){
+  const q = raw.trim();
+  mylistAddResult.innerHTML = `<div class="lk-ai-loading-row"><span class="lk-ai-spinner"></span> Переводим «${q}» через AI…</div>`;
+  const fromRu = isCyr(q);
+  const from = fromRu ? 'ru' : 'en';
+  const to = fromRu ? 'en' : 'ru';
+  let translated = null;
+  try{ translated = await tryGoogleTranslate(q, from, to); } catch(e){}
+  if(!translated){ try{ translated = await tryMyMemory(q, from, to); } catch(e){} }
+  if(translated){
+    const en = fromRu ? translated : q;
+    const ru = fromRu ? q : translated;
+    mylistAddResult.innerHTML = `
+      <div class="mylist-ai-result">
+        <span class="lk-level lk-level-ai">✨ AI</span>
+        <div class="mylist-ai-pair"><b>${en}</b> — ${ru}</div>
+        <button type="button" class="start-btn" id="mylistAiAddBtn">+ Добавить в список</button>
+      </div>`;
+    document.getElementById('mylistAiAddBtn').addEventListener('click', ()=>{
+      addToMyList(en, ru, 'ai');
+      closeMylistAddModal();
+    });
+  } else {
+    mylistAddResult.innerHTML = `<p class="lk-ai-fail">⚠️ Не получилось перевести это слово. Сервисы перевода недоступны или превышен лимит. Попробуйте ещё раз позже.</p>`;
+  }
+}
+
+function mylistRunSearch(){
+  const raw = mylistAddInput.value.trim();
+  if(!raw){ mylistAddResult.innerHTML=''; return; }
+  const matches = mylistSearchLocal(raw);
+  if(matches.length){ renderMylistLocalMatches(matches); }
+  else{ mylistAiTranslate(raw); }
+}
+const mylistAddSearchBtn = document.getElementById('mylistAddSearchBtn');
+if(mylistAddSearchBtn) mylistAddSearchBtn.addEventListener('click', mylistRunSearch);
+if(mylistAddInput){
+  mylistAddInput.addEventListener('input', ()=>{
+    const raw = mylistAddInput.value.trim();
+    if(!raw){ mylistAddResult.innerHTML=''; return; }
+    const matches = mylistSearchLocal(raw);
+    if(matches.length) renderMylistLocalMatches(matches);
+    else mylistAddResult.innerHTML = `<p class="lk-empty">Нажмите «Найти», чтобы перевести через AI.</p>`;
+  });
+  mylistAddInput.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){ e.preventDefault(); mylistRunSearch(); }
+  });
+}
+
+/* -- flashcard review -- */
+let mylistReviewIdx = 0;
+let mylistReviewFlipped = false;
+const mylistReviewOv = document.getElementById('mylistReviewOv');
+const mylistReviewBtn = document.getElementById('mylistReviewBtn');
+if(mylistReviewBtn) mylistReviewBtn.addEventListener('click', startMylistReview);
+const mylistReviewClose = document.getElementById('mylistReviewClose');
+if(mylistReviewClose) mylistReviewClose.addEventListener('click', ()=>{ mylistReviewOv.hidden = true; });
+
+function startMylistReview(){
+  if(!myList.length || !mylistReviewOv) return;
+  mylistReviewIdx = 0;
+  mylistReviewOv.hidden = false;
+  mylistReviewOv.classList.add('show');
+  renderMylistFlash();
+}
+function renderMylistFlash(){
+  const flash = document.getElementById('mylistFlash');
+  const progress = document.getElementById('mylistReviewProgress');
+  const actions = document.getElementById('mylistReviewActions');
+  if(mylistReviewIdx >= myList.length){
+    flash.innerHTML = `<div class="mylist-done">🎉 Вы повторили все слова!</div>`;
+    if(progress){ progress.textContent = ''; progress.classList.remove('ml-progress-anim'); }
+    actions.innerHTML = `<button type="button" class="start-btn" id="mylistReviewAgain">Повторить ещё раз</button>`;
+    document.getElementById('mylistReviewAgain').addEventListener('click', startMylistReview);
+    return;
+  }
+  const item = myList[mylistReviewIdx];
+  mylistReviewFlipped = false;
+  if(progress){
+    progress.textContent = `${mylistReviewIdx + 1} из ${myList.length}`;
+    progress.classList.remove('ml-progress-anim');
+    void progress.offsetWidth;
+    progress.classList.add('ml-progress-anim');
+  }
+  flash.innerHTML = `
+    <div class="mylist-flash-card" id="mylistFlashCard">
+      <div class="mylist-flash-card-inner">
+        <div class="mylist-flash-face mylist-flash-front">
+          <div class="mylist-flash-word">${item.en}</div>
+          <div class="mylist-flash-hint">Нажмите, чтобы увидеть перевод</div>
+        </div>
+        <div class="mylist-flash-face back">
+          <div class="mylist-flash-ru">${item.ru}</div>
+          <div class="mylist-flash-hint">Нажмите, чтобы вернуться к слову</div>
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('mylistFlashCard').addEventListener('click', (e)=>{
+    mylistReviewFlipped = !mylistReviewFlipped;
+    e.currentTarget.classList.toggle('flipped', mylistReviewFlipped);
+  });
+  actions.innerHTML = `
+    <button type="button" class="tab" id="mylistSkip">Пропустить</button>
+    <button type="button" class="start-btn" id="mylistNext">Дальше →</button>`;
+  const nextCard = ()=>{
+    const card = document.getElementById('mylistFlashCard');
+    const nextBtn = document.getElementById('mylistNext');
+    const skipBtn = document.getElementById('mylistSkip');
+    if(card && !card.classList.contains('leaving')){
+      card.classList.add('leaving');
+      if(nextBtn) nextBtn.disabled = true;
+      if(skipBtn) skipBtn.disabled = true;
+      setTimeout(()=>{ mylistReviewIdx++; renderMylistFlash(); }, 180);
+    }
+  };
+  document.getElementById('mylistNext').addEventListener('click', nextCard);
+  document.getElementById('mylistSkip').addEventListener('click', nextCard);
+}
+
 const statWords = document.getElementById('statWords');
 const statExamples = document.getElementById('statExamples');
 const dictBadge = document.getElementById('dictBadge');
