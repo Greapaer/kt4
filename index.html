@@ -380,7 +380,7 @@
   /* ---------- achievement toasts ---------- */
   .toast-stack{position:fixed;bottom:20px;right:20px;left:auto;display:flex;flex-direction:column-reverse;gap:10px;z-index:200;max-width:320px;pointer-events:none;}
   @media(max-width:900px){
-    .toast-stack{bottom:68px;bottom:calc(var(--nav-h) + var(--nav-gap) + 10px);}
+    .toast-stack{bottom:84px;bottom:calc(var(--nav-h) + var(--nav-gap) + 26px);}
   }
   .toast{pointer-events:auto;background:var(--panel);border:1px solid var(--teal-dim);border-radius:14px;padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:0 14px 34px -12px rgba(0,0,0,.5);animation:toastIn .22s cubic-bezier(.2,.8,.3,1);}
   .toast .t-sticker{font-size:26px;flex-shrink:0;}
@@ -421,11 +421,12 @@
   .selection-pill .change-btn:hover{border-color:var(--rule-strong);color:var(--ink);}
   .selection-pill .change-btn svg{width:11px;height:11px;}
 
-  .jump-nav{display:none;gap:6px;flex-wrap:wrap;margin:18px 0 0;padding:12px;background:var(--panel);border:1px solid var(--rule);border-radius:10px;z-index:5;}
+  .jump-nav{display:none;align-items:center;gap:14px;flex-wrap:wrap;margin:10px 0 0;padding:8px 2px;border-bottom:1px solid var(--rule);z-index:5;}
   .jump-nav.show{display:flex;}
-  .jump-nav a{font-family:'Nunito',sans-serif;font-size:11px;letter-spacing:.03em;color:var(--ink-dim);text-decoration:none;padding:6px 12px;border-radius:16px;border:1px solid transparent;transition:background .15s,color .15s;white-space:nowrap;}
-  .jump-nav a:hover{background:var(--card-hover);color:var(--ink);}
-  .jump-nav a.current{background:var(--teal-dim);color:var(--teal);border-color:var(--teal-dim);}
+  .jump-nav::before{content:'На этой странице:';font-size:10.5px;letter-spacing:.04em;color:var(--ink-faint);text-transform:uppercase;flex-shrink:0;}
+  .jump-nav a{font-family:'Nunito',sans-serif;font-size:12px;letter-spacing:.02em;color:var(--ink-dim);text-decoration:none;padding:3px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap;}
+  .jump-nav a:hover{color:var(--ink);}
+  .jump-nav a.current{color:var(--teal);border-color:var(--teal);font-weight:700;}
 
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:0 0 44px;}
   .topic-section{margin:28px 0 0;content-visibility:auto;contain-intrinsic-size:auto 600px;}
@@ -525,9 +526,6 @@
   @media(max-width:480px){ .quiz-level-grid{grid-template-columns:1fr;} }
   #quizView{display:none;min-height:calc(100vh - 140px);padding-top:8px;}
   .quiz-progress-label{font-family:'Nunito',sans-serif;font-size:12px;letter-spacing:.04em;color:var(--ink-faint);}
-
-  
-  
 
   .quiz-stage{max-width:520px;margin:40px auto 60px;display:flex;flex-direction:column;align-items:center;}
   .quiz-question{text-align:center;margin-bottom:34px;display:flex;flex-direction:column;align-items:center;gap:10px;}
@@ -753,6 +751,18 @@
   .lk-ex{color:var(--ink-dim);font-size:13.5px;font-style:italic;margin:0;line-height:1.5;}
   .lk-empty{color:var(--ink-dim);font-size:13.5px;margin:0;font-style:italic;}
   .lk-empty b{color:var(--ink);font-style:normal;}
+  .lk-nf{display:flex;gap:14px;align-items:flex-start;}
+  .lk-nf-icon{font-size:26px;line-height:1;flex-shrink:0;filter:grayscale(.15);}
+  .lk-nf-body{min-width:0;}
+  .lk-nf-title{font-family:'Nunito',sans-serif;font-weight:800;font-size:15.5px;color:var(--ink);margin:0 0 4px;}
+  .lk-nf-sub{color:var(--ink-dim);font-size:13.5px;margin:0;line-height:1.5;}
+  .lk-chip{display:inline-flex;align-items:center;background:var(--teal-dim);color:var(--teal);border:none;font:inherit;font-weight:700;font-size:13px;padding:2px 10px;border-radius:20px;cursor:pointer;transition:filter .15s,transform .15s;}
+  .lk-chip:hover{filter:brightness(1.08);transform:translateY(-1px);}
+  .lk-level-ai{background:var(--teal);}
+  .lk-ai-loading-row{display:flex;align-items:center;gap:10px;color:var(--ink-dim);font-size:14px;padding:10px 0;}
+  .lk-ai-spinner{width:16px;height:16px;border-radius:50%;border:2px solid var(--rule-strong);border-top-color:var(--teal);animation:lkSpin .7s linear infinite;flex-shrink:0;}
+  @keyframes lkSpin{to{transform:rotate(360deg);}}
+  .lk-ai-disclaimer{font-size:11.5px;color:var(--ink-faint);margin:10px 0 0;line-height:1.4;}
   .lk-open{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-weight:600;font-size:12.5px;color:var(--amber);background:none;border:none;cursor:pointer;padding:0;}
   .lk-open:hover{text-decoration:underline;}
 
@@ -785,7 +795,8 @@
   .step-node:last-child::after{display:none;}
   .sn-dot{width:42px;height:42px;border-radius:50%;background:var(--panel);border:2px solid var(--rule-strong);display:flex;align-items:center;justify-content:center;font-family:'Nunito',sans-serif;font-weight:700;font-size:12.5px;color:var(--ink-dim);position:relative;z-index:1;transition:transform .15s,border-color .15s,color .15s,background .15s;}
   .sn-dot svg{width:16px;height:16px;}
-  .sn-name{font-size:10.5px;color:var(--ink-faint);text-align:center;line-height:1.2;max-width:76px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .sn-name{font-size:10.5px;color:var(--ink-faint);text-align:center;line-height:1.2;max-width:80px;}
+  .ob-stepper .sn-name{white-space:normal;max-width:90px;}
   .sn-pct{font-family:'Nunito',sans-serif;font-size:10px;color:var(--ink-faint);}
   .step-node:hover .sn-dot{transform:scale(1.1);color:var(--ink);}
   .step-node.lvl-A1 .sn-dot{border-color:#ff9e93;color:#ff9e93;}
@@ -901,9 +912,15 @@
   .modal-actions .tab{padding:10px 16px;}
 
   /* onboarding: full-screen first-visit */
-  .onboard{position:fixed;inset:0;z-index:600;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:32px 20px;overflow-y:auto;opacity:0;transition:opacity .25s ease;}
+  .onboard{position:fixed;inset:0;z-index:600;background:
+      radial-gradient(720px 480px at 12% -10%, var(--amber-dim) 0%, transparent 60%),
+      radial-gradient(640px 460px at 108% 108%, var(--teal-dim) 0%, transparent 60%),
+      var(--bg);
+    display:flex;align-items:center;justify-content:center;padding:32px 20px;overflow-y:auto;opacity:0;transition:opacity .25s ease;}
   .onboard.show{opacity:1;}
   .onboard[hidden]{display:none;}
+  .onboard-inner{background:var(--panel);border:1px solid var(--rule);border-radius:28px;padding:44px 40px;box-shadow:0 30px 80px -30px rgba(0,0,0,.35);}
+  @media(max-width:560px){.onboard-inner{padding:32px 24px;border-radius:22px;}}
   body.ob-locked{overflow:hidden;}
   .onboard-inner{width:min(600px,100%);margin:auto;}
   .onboard-brand{display:flex;align-items:center;gap:10px;margin-bottom:38px;}
@@ -1027,7 +1044,6 @@
       <button type="button" class="main-nav-link active" data-nav="home">Главная</button>
       <button type="button" class="main-nav-link" data-nav="library">Все слова</button>
       <button type="button" class="main-nav-link" data-nav="quiz">Тренировка</button>
-      
     </nav>
     <span class="chip-res">🔥<b id="hdrStreak">0</b></span>
       <span class="chip-res xp-chip"><i class="xp-mini" style="display:inline-flex;"><i id="hdrXpFill" style="width:0%"></i></i><b id="hdrPct">0%</b></span>
@@ -1317,6 +1333,7 @@
   <div class="match-stage" id="matchStage"></div>
 </div>
 
+
 </main>
 
 <footer>
@@ -1415,7 +1432,6 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
     Профиль
   </button>
-  
 </nav>
 
 <script>
@@ -4039,187 +4055,7 @@ const WORDS = [
   {w:"sale", ipa:"/seɪl/", ru:"распродажа", cat:"шопинг", lvl:"A1", ex:"Everything is on sale.", exru:"Всё на распродаже."},
   {w:"discount", ipa:"/ˈdɪskaʊnt/", ru:"скидка", cat:"шопинг", lvl:"B2", ex:"I got a ten percent discount.", exru:"Я получил скидку десять процентов."},
   {w:"fashion", ipa:"/ˈfæʃn/", ru:"мода", cat:"шопинг", lvl:"B2", ex:"Fashion changes every year.", exru:"Мода меняется каждый год."},
-  {w:"luxury", ipa:"/ˈlʌkʃəri/", ru:"роскошь", cat:"шопинг", lvl:"C1", ex:"A long bath is a luxury.", exru:"Долгая ванна — это роскошь."},
-  {w:"kettle", ipa:"/ˈketl/", ru:"чайник", cat:"дом", lvl:"A2", ex:"Boil the kettle for tea.", exru:"Вскипяти чайник для чая."},
-  {w:"microwave", ipa:"/ˈmaɪkrəweɪv/", ru:"микроволновка", cat:"дом", lvl:"B1", ex:"Heat it in the microwave.", exru:"Разогрей это в микроволновке."},
-  {w:"fridge", ipa:"/frɪdʒ/", ru:"холодильник", cat:"дом", lvl:"A1", ex:"The milk is in the fridge.", exru:"Молоко в холодильнике."},
-  {w:"refrigerator", ipa:"/rɪˈfrɪdʒəreɪtə/", ru:"холодильник", cat:"дом", lvl:"A2", ex:"The refrigerator is empty.", exru:"Холодильник пуст."},
-  {w:"stove", ipa:"/stəʊv/", ru:"плита", cat:"дом", lvl:"A2", ex:"Turn off the stove.", exru:"Выключи плиту."},
-  {w:"sofa", ipa:"/ˈsəʊfə/", ru:"диван", cat:"дом", lvl:"A1", ex:"Sit on the sofa.", exru:"Сядь на диван."},
-  {w:"blanket", ipa:"/ˈblæŋkɪt/", ru:"одеяло", cat:"дом", lvl:"A2", ex:"I need a warm blanket.", exru:"Мне нужно тёплое одеяло."},
-  {w:"pillow", ipa:"/ˈpɪləʊ/", ru:"подушка", cat:"дом", lvl:"A1", ex:"My pillow is soft.", exru:"Моя подушка мягкая."},
-  {w:"wardrobe", ipa:"/ˈwɔːdrəʊb/", ru:"шкаф для одежды", cat:"дом", lvl:"A2", ex:"Hang it in the wardrobe.", exru:"Повесь это в шкаф."},
-  {w:"shelf", ipa:"/ʃelf/", ru:"полка", cat:"дом", lvl:"A1", ex:"Put the book on the shelf.", exru:"Поставь книгу на полку."},
-  {w:"broom", ipa:"/bruːm/", ru:"веник", cat:"дом", lvl:"A2", ex:"Sweep with a broom.", exru:"Подмети веником."},
-  {w:"vacuum", ipa:"/ˈvækjuəm/", ru:"пылесос", cat:"дом", lvl:"B1", ex:"I vacuum on Sundays.", exru:"Я пылесошу по воскресеньям."},
-  {w:"detergent", ipa:"/dɪˈtɜːdʒənt/", ru:"стиральный порошок", cat:"дом", lvl:"B1", ex:"Add some detergent.", exru:"Добавь немного порошка."},
-  {w:"sponge", ipa:"/spʌndʒ/", ru:"губка", cat:"дом", lvl:"A2", ex:"Wipe it with a sponge.", exru:"Протри губкой."},
-  {w:"tap", ipa:"/tæp/", ru:"кран", cat:"дом", lvl:"A1", ex:"Turn on the tap.", exru:"Открой кран."},
-  {w:"plug", ipa:"/plʌɡ/", ru:"вилка", cat:"дом", lvl:"A2", ex:"Plug it in.", exru:"Включи в розетку."},
-  {w:"socket", ipa:"/ˈsɒkɪt/", ru:"розетка", cat:"дом", lvl:"B1", ex:"The socket is near the door.", exru:"Розетка у двери."},
-  {w:"bulb", ipa:"/bʌlb/", ru:"лампочка", cat:"дом", lvl:"A2", ex:"Change the bulb.", exru:"Замени лампочку."},
-  {w:"curtain", ipa:"/ˈkɜːtn/", ru:"штора", cat:"дом", lvl:"A2", ex:"Close the curtains.", exru:"Закрой шторы."},
-  {w:"rug", ipa:"/rʌɡ/", ru:"коврик", cat:"дом", lvl:"A2", ex:"A small rug by the bed.", exru:"Маленький коврик у кровати."},
-  {w:"doormat", ipa:"/ˈdɔːmæt/", ru:"придверный коврик", cat:"дом", lvl:"B1", ex:"Wipe your feet on the doormat.", exru:"Вытри ноги о коврик."},
-  {w:"landlord", ipa:"/ˈlændlɔːd/", ru:"арендодатель", cat:"дом", lvl:"B2", ex:"The landlord fixed it.", exru:"Арендодатель это починил."},
-  {w:"tenant", ipa:"/ˈtenənt/", ru:"арендатор", cat:"дом", lvl:"B2", ex:"The tenant moved out.", exru:"Арендатор съехал."},
-  {w:"closet", ipa:"/ˈklɒzɪt/", ru:"шкаф чулан", cat:"дом", lvl:"B1", ex:"Store it in the closet.", exru:"Убери это в шкаф."},
-  {w:"dishwasher", ipa:"/ˈdɪʃwɒʃə/", ru:"посудомойка", cat:"дом", lvl:"B1", ex:"Load the dishwasher.", exru:"Загрузи посудомойку."},
-  {w:"laundry", ipa:"/ˈlɔːndri/", ru:"стирка", cat:"дом", lvl:"A2", ex:"Do the laundry.", exru:"Сделай стирку."},
-  {w:"iron", ipa:"/ˈaɪən/", ru:"утюг", cat:"дом", lvl:"A2", ex:"Iron your shirt.", exru:"Погладь рубашку."},
-  {w:"mattress", ipa:"/ˈmætrəs/", ru:"матрас", cat:"дом", lvl:"B1", ex:"The mattress is new.", exru:"Матрас новый."},
-  {w:"mirror", ipa:"/ˈmɪrə/", ru:"зеркало", cat:"дом", lvl:"A1", ex:"Look in the mirror.", exru:"Посмотри в зеркало."},
-  {w:"balcony", ipa:"/ˈbælkəni/", ru:"балкон", cat:"дом", lvl:"A2", ex:"Coffee on the balcony.", exru:"Кофе на балконе."},
-  {w:"goal", ipa:"/ɡəʊl/", ru:"гол", cat:"спорт", lvl:"A1", ex:"He scored a goal.", exru:"Он забил гол."},
-  {w:"score", ipa:"/skɔː/", ru:"счёт", cat:"спорт", lvl:"A2", ex:"What is the score?", exru:"Какой счёт?"},
-  {w:"team", ipa:"/tiːm/", ru:"команда", cat:"спорт", lvl:"A1", ex:"Our team won.", exru:"Наша команда выиграла."},
-  {w:"coach", ipa:"/kəʊtʃ/", ru:"тренер", cat:"спорт", lvl:"A2", ex:"The coach is strict.", exru:"Тренер строгий."},
-  {w:"stadium", ipa:"/ˈsteɪdiəm/", ru:"стадион", cat:"спорт", lvl:"A2", ex:"The stadium is full.", exru:"Стадион полон."},
-  {w:"athlete", ipa:"/ˈæθliːt/", ru:"спортсмен", cat:"спорт", lvl:"B1", ex:"She is a great athlete.", exru:"Она отличный спортсмен."},
-  {w:"marathon", ipa:"/ˈmærəθən/", ru:"марафон", cat:"спорт", lvl:"B1", ex:"He ran a marathon.", exru:"Он пробежал марафон."},
-  {w:"referee", ipa:"/ˌrefəˈriː/", ru:"судья", cat:"спорт", lvl:"B1", ex:"The referee blew the whistle.", exru:"Судья дал свисток."},
-  {w:"whistle", ipa:"/ˈwɪsl/", ru:"свисток", cat:"спорт", lvl:"A2", ex:"The whistle ended the game.", exru:"Свисток завершил игру."},
-  {w:"opponent", ipa:"/əˈpəʊnənt/", ru:"соперник", cat:"спорт", lvl:"B1", ex:"A strong opponent.", exru:"Сильный соперник."},
-  {w:"championship", ipa:"/ˈtʃæmpiənʃɪp/", ru:"чемпионат", cat:"спорт", lvl:"B1", ex:"We won the championship.", exru:"Мы выиграли чемпионат."},
-  {w:"medal", ipa:"/ˈmedl/", ru:"медаль", cat:"спорт", lvl:"A2", ex:"She won a gold medal.", exru:"Она выиграла золотую медаль."},
-  {w:"ski", ipa:"/skiː/", ru:"лыжи", cat:"спорт", lvl:"A2", ex:"Let us go skiing.", exru:"Пойдём кататься на лыжах."},
-  {w:"skate", ipa:"/skeɪt/", ru:"коньки", cat:"спорт", lvl:"A2", ex:"I can skate.", exru:"Я умею кататься на коньках."},
-  {w:"jog", ipa:"/dʒɒɡ/", ru:"бегать трусцой", cat:"спорт", lvl:"A2", ex:"I jog every morning.", exru:"Я бегаю трусцой каждое утро."},
-  {w:"warm-up", ipa:"/ˈwɔːmʌp/", ru:"разминка", cat:"спорт", lvl:"B1", ex:"Do a warm-up first.", exru:"Сделай сначала разминку."},
-  {w:"tournament", ipa:"/ˈtʊənəmənt/", ru:"турнир", cat:"спорт", lvl:"B1", ex:"A tennis tournament.", exru:"Теннисный турнир."},
-  {w:"pitch", ipa:"/pɪtʃ/", ru:"футбольное поле", cat:"спорт", lvl:"B1", ex:"The pitch is wet.", exru:"Поле мокрое."},
-  {w:"court", ipa:"/kɔːt/", ru:"корт", cat:"спорт", lvl:"B2", ex:"Book the tennis court.", exru:"Забронируй теннисный корт."},
-  {w:"kayak", ipa:"/ˈkaɪæk/", ru:"байдарка", cat:"спорт", lvl:"B2", ex:"We rented a kayak.", exru:"Мы взяли напрокат байдарку."},
-  {w:"cycling", ipa:"/ˈsaɪklɪŋ/", ru:"езда на велосипеде", cat:"спорт", lvl:"A2", ex:"Cycling is good exercise.", exru:"Езда на велосипеде полезна."},
-  {w:"boxing", ipa:"/ˈbɒksɪŋ/", ru:"бокс", cat:"спорт", lvl:"B1", ex:"Boxing is intense.", exru:"Бокс — это интенсивно."},
-  {w:"yoga", ipa:"/ˈjəʊɡə/", ru:"йога", cat:"спорт", lvl:"A2", ex:"I do yoga daily.", exru:"Я делаю йогу каждый день."},
-  {w:"dive", ipa:"/daɪv/", ru:"нырять", cat:"спорт", lvl:"B1", ex:"He learned to dive.", exru:"Он научился нырять."},
-  {w:"captain", ipa:"/ˈkæptɪn/", ru:"капитан", cat:"спорт", lvl:"B2", ex:"The captain led the team.", exru:"Капитан повёл команду."},
-  {w:"fan", ipa:"/fæn/", ru:"болельщик", cat:"спорт", lvl:"A1", ex:"I am a big fan.", exru:"Я большой болельщик."},
-  {w:"cheer", ipa:"/tʃɪə/", ru:"подбадривать", cat:"спорт", lvl:"B1", ex:"The crowd cheered.", exru:"Толпа приветствовала."},
-  {w:"defeat", ipa:"/dɪˈfiːt/", ru:"поражение", cat:"спорт", lvl:"B2", ex:"They suffered a defeat.", exru:"Они потерпели поражение."},
-  {w:"tie", ipa:"/taɪ/", ru:"ничья", cat:"спорт", lvl:"B1", ex:"The match ended in a tie.", exru:"Матч закончился вничью."},
-  {w:"record", ipa:"/ˈrekɔːd/", ru:"рекорд", cat:"спорт", lvl:"B1", ex:"He broke the record.", exru:"Он побил рекорд."},
-  {w:"computer", ipa:"/kəmˈpjuːtə/", ru:"компьютер", cat:"техно", lvl:"A1", ex:"The computer is slow.", exru:"Компьютер медленный."},
-  {w:"laptop", ipa:"/ˈlæptɒp/", ru:"ноутбук", cat:"техно", lvl:"A2", ex:"My laptop is new.", exru:"Мой ноутбук новый."},
-  {w:"smartphone", ipa:"/ˈsmɑːtfəʊn/", ru:"смартфон", cat:"техно", lvl:"A2", ex:"Check your smartphone.", exru:"Проверь смартфон."},
-  {w:"app", ipa:"/æp/", ru:"приложение", cat:"техно", lvl:"A1", ex:"Download the app.", exru:"Скачай приложение."},
-  {w:"password", ipa:"/ˈpɑːswɜːd/", ru:"пароль", cat:"техно", lvl:"A2", ex:"Use a strong password.", exru:"Используй надёжный пароль."},
-  {w:"wifi", ipa:"/ˈwaɪfaɪ/", ru:"вай-фай", cat:"техно", lvl:"A1", ex:"The wifi is down.", exru:"Вай-фай не работает."},
-  {w:"browser", ipa:"/ˈbraʊzə/", ru:"браузер", cat:"техно", lvl:"B1", ex:"Open a new browser tab.", exru:"Открой новую вкладку браузера."},
-  {w:"download", ipa:"/ˌdaʊnˈləʊd/", ru:"скачивать", cat:"техно", lvl:"A2", ex:"Download the file.", exru:"Скачай файл."},
-  {w:"upload", ipa:"/ˌʌpˈləʊd/", ru:"загружать", cat:"техно", lvl:"B1", ex:"Upload the photo.", exru:"Загрузи фото."},
-  {w:"software", ipa:"/ˈsɒftweə/", ru:"программное обеспечение", cat:"техно", lvl:"B1", ex:"The software updated.", exru:"ПО обновилось."},
-  {w:"hardware", ipa:"/ˈhɑːdweə/", ru:"аппаратное обеспечение", cat:"техно", lvl:"B2", ex:"The hardware failed.", exru:"Железо вышло из строя."},
-  {w:"data", ipa:"/ˈdeɪtə/", ru:"данные", cat:"техно", lvl:"B1", ex:"We lost the data.", exru:"Мы потеряли данные."},
-  {w:"cloud", ipa:"/klaʊd/", ru:"облако хранение", cat:"техно", lvl:"B1", ex:"Save it to the cloud.", exru:"Сохрани в облако."},
-  {w:"server", ipa:"/ˈsɜːvə/", ru:"сервер", cat:"техно", lvl:"B1", ex:"The server is busy.", exru:"Сервер перегружен."},
-  {w:"robot", ipa:"/ˈrəʊbɒt/", ru:"робот", cat:"техно", lvl:"B1", ex:"A robot cleaned the floor.", exru:"Робот вымыл пол."},
-  {w:"artificial intelligence", ipa:"/ˌɑːtɪˈfɪʃl ɪnˈtelɪdʒəns/", ru:"искусственный интеллект", cat:"техно", lvl:"B2", ex:"AI helps doctors.", exru:"ИИ помогает врачам."},
-  {w:"algorithm", ipa:"/ˈælɡərɪðəm/", ru:"алгоритм", cat:"техно", lvl:"B2", ex:"The algorithm changed.", exru:"Алгоритм изменился."},
-  {w:"code", ipa:"/kəʊd/", ru:"код", cat:"техно", lvl:"B1", ex:"Write clean code.", exru:"Пиши чистый код."},
-  {w:"voltage", ipa:"/ˈvəʊltɪdʒ/", ru:"напряжение", cat:"техно", lvl:"B2", ex:"Check the voltage.", exru:"Проверь напряжение."},
-  {w:"battery", ipa:"/ˈbætri/", ru:"батарея", cat:"техно", lvl:"A2", ex:"The battery is dead.", exru:"Батарейка села."},
-  {w:"charge", ipa:"/tʃɑːdʒ/", ru:"заряжать", cat:"техно", lvl:"A2", ex:"Charge your phone.", exru:"Заряди телефон."},
-  {w:"gadget", ipa:"/ˈɡædʒɪt/", ru:"гаджет", cat:"техно", lvl:"B1", ex:"A useful gadget.", exru:"Полезный гаджет."},
-  {w:"screenshot", ipa:"/ˈskriːnʃɒt/", ru:"скриншот", cat:"техно", lvl:"B1", ex:"Take a screenshot.", exru:"Сделай скриншот."},
-  {w:"plugin", ipa:"/ˈplʌɡɪn/", ru:"плагин", cat:"техно", lvl:"B2", ex:"Install the plugin.", exru:"Установи плагин."},
-  {w:"firewall", ipa:"/ˈfaɪəwɔːl/", ru:"брандмауэр", cat:"техно", lvl:"B2", ex:"The firewall blocked it.", exru:"Брандмауэр заблокировал."},
-  {w:"encryption", ipa:"/ɪnˈkrɪpʃn/", ru:"шифрование", cat:"техно", lvl:"B2", ex:"Use encryption.", exru:"Используй шифрование."},
-  {w:"database", ipa:"/ˈdeɪtəbeɪs/", ru:"база данных", cat:"техно", lvl:"B2", ex:"Query the database.", exru:"Сделай запрос к базе."},
-  {w:"network", ipa:"/ˈnetwɜːk/", ru:"сеть", cat:"техно", lvl:"B1", ex:"The network is slow.", exru:"Сеть медленная."},
-  {w:"virtual reality", ipa:"/ˌvɜːtʃuəl rɪˈæləti/", ru:"виртуальная реальность", cat:"техно", lvl:"B2", ex:"VR is immersive.", exru:"VR — это погружение."},
-  {w:"USB", ipa:"/ˌjuː es ˈbiː/", ru:"флешка USB", cat:"техно", lvl:"A2", ex:"Plug in the USB.", exru:"Вставь флешку."},
-  {w:"second", ipa:"/ˈsekənd/", ru:"секунда", cat:"время", lvl:"A1", ex:"Wait a second.", exru:"Подожди секунду."},
-  {w:"minute", ipa:"/ˈmɪnɪt/", ru:"минута", cat:"время", lvl:"A1", ex:"Just a minute.", exru:"Одну минуту."},
-  {w:"hour", ipa:"/ˈaʊə/", ru:"час", cat:"время", lvl:"A1", ex:"It takes an hour.", exru:"Это займёт час."},
-  {w:"morning", ipa:"/ˈmɔːnɪŋ/", ru:"утро", cat:"время", lvl:"A1", ex:"Good morning.", exru:"Доброе утро."},
-  {w:"afternoon", ipa:"/ˌɑːftəˈnuːn/", ru:"день после полудня", cat:"время", lvl:"A1", ex:"See you this afternoon.", exru:"Увидимся днём."},
-  {w:"evening", ipa:"/ˈiːvnɪŋ/", ru:"вечер", cat:"время", lvl:"A1", ex:"Good evening.", exru:"Добрый вечер."},
-  {w:"midnight", ipa:"/ˈmɪdnaɪt/", ru:"полночь", cat:"время", lvl:"A2", ex:"At midnight.", exru:"В полночь."},
-  {w:"noon", ipa:"/nuːn/", ru:"полдень", cat:"время", lvl:"A2", ex:"Meet at noon.", exru:"Встретимся в полдень."},
-  {w:"week", ipa:"/wiːk/", ru:"неделя", cat:"время", lvl:"A1", ex:"Once a week.", exru:"Раз в неделю."},
-  {w:"weekend", ipa:"/ˈwiːkend/", ru:"выходные", cat:"время", lvl:"A1", ex:"We relax on weekends.", exru:"Мы отдыхаем на выходных."},
-  {w:"month", ipa:"/mʌnθ/", ru:"месяц", cat:"время", lvl:"A1", ex:"Next month.", exru:"В следующем месяце."},
-  {w:"year", ipa:"/jɪə/", ru:"год", cat:"время", lvl:"A1", ex:"Happy new year.", exru:"С новым годом."},
-  {w:"decade", ipa:"/ˈdekeɪd/", ru:"десятилетие", cat:"время", lvl:"B2", ex:"A decade passed.", exru:"Прошло десятилетие."},
-  {w:"century", ipa:"/ˈsentʃəri/", ru:"век столетие", cat:"время", lvl:"B2", ex:"In the 21st century.", exru:"В 21-м веке."},
-  {w:"Monday", ipa:"/ˈmʌndeɪ/", ru:"понедельник", cat:"время", lvl:"A1", ex:"Monday is busy.", exru:"Понедельник загруженный."},
-  {w:"Tuesday", ipa:"/ˈtjuːzdeɪ/", ru:"вторник", cat:"время", lvl:"A1", ex:"On Tuesday.", exru:"Во вторник."},
-  {w:"Wednesday", ipa:"/ˈwenzdeɪ/", ru:"среда", cat:"время", lvl:"A1", ex:"See you Wednesday.", exru:"Увидимся в среду."},
-  {w:"Thursday", ipa:"/ˈθɜːzdeɪ/", ru:"четверг", cat:"время", lvl:"A1", ex:"Thursday works.", exru:"Четверг подходит."},
-  {w:"Friday", ipa:"/ˈfraɪdeɪ/", ru:"пятница", cat:"время", lvl:"A1", ex:"Friday at last.", exru:"Наконец пятница."},
-  {w:"Saturday", ipa:"/ˈsætədeɪ/", ru:"суббота", cat:"время", lvl:"A1", ex:"Saturday morning.", exru:"В субботу утром."},
-  {w:"Sunday", ipa:"/ˈsʌndeɪ/", ru:"воскресенье", cat:"время", lvl:"A1", ex:"Sunday rest.", exru:"Воскресный отдых."},
-  {w:"January", ipa:"/ˈdʒænjuəri/", ru:"январь", cat:"время", lvl:"A1", ex:"In January.", exru:"В январе."},
-  {w:"February", ipa:"/ˈfebruəri/", ru:"февраль", cat:"время", lvl:"A1", ex:"By February.", exru:"К февралю."},
-  {w:"December", ipa:"/dɪˈsembə/", ru:"декабрь", cat:"время", lvl:"A1", ex:"Until December.", exru:"До декабря."},
-  {w:"date", ipa:"/deɪt/", ru:"дата", cat:"время", lvl:"A1", ex:"What is the date?", exru:"Какое число?"},
-  {w:"calendar", ipa:"/ˈkælɪndə/", ru:"календарь", cat:"время", lvl:"A2", ex:"Check the calendar.", exru:"Проверь календарь."},
-  {w:"schedule", ipa:"/ˈʃedjuːl/", ru:"расписание", cat:"время", lvl:"B1", ex:"My schedule is full.", exru:"Моё расписание полное."},
-  {w:"deadline", ipa:"/ˈdedlaɪn/", ru:"крайний срок", cat:"время", lvl:"B1", ex:"The deadline is Friday.", exru:"Крайний срок — пятница."},
-  {w:"duration", ipa:"/djuˈreɪʃn/", ru:"длительность", cat:"время", lvl:"B2", ex:"The duration is two hours.", exru:"Длительность — два часа."},
-  {w:"era", ipa:"/ˈɪərə/", ru:"эпоха", cat:"время", lvl:"B2", ex:"A new era began.", exru:"Началась новая эпоха."},
-  {w:"shop", ipa:"/ʃɒp/", ru:"магазин", cat:"шопинг", lvl:"A1", ex:"Go to the shop.", exru:"Иди в магазин."},
-  {w:"supermarket", ipa:"/ˈsuːpəmɑːkɪt/", ru:"супермаркет", cat:"шопинг", lvl:"A1", ex:"Buy it at the supermarket.", exru:"Купи в супермаркете."},
-  {w:"mall", ipa:"/mɔːl/", ru:"торговый центр", cat:"шопинг", lvl:"A2", ex:"Meet at the mall.", exru:"Встретимся в ТЦ."},
-  {w:"cart", ipa:"/kɑːt/", ru:"тележка", cat:"шопинг", lvl:"A2", ex:"Push the cart.", exru:"Катай тележку."},
-  {w:"basket", ipa:"/ˈbɑːskɪt/", ru:"корзина", cat:"шопинг", lvl:"A1", ex:"A shopping basket.", exru:"Корзина для покупок."},
-  {w:"price", ipa:"/praɪs/", ru:"цена", cat:"шопинг", lvl:"A1", ex:"What is the price?", exru:"Какая цена?"},
-  {w:"cost", ipa:"/kɒst/", ru:"стоить", cat:"шопинг", lvl:"A1", ex:"It costs ten dollars.", exru:"Это стоит десять долларов."},
-  {w:"cheap", ipa:"/tʃiːp/", ru:"дёшево", cat:"шопинг", lvl:"A1", ex:"This is cheap.", exru:"Это дёшево."},
-  {w:"expensive", ipa:"/ɪkˈspensɪv/", ru:"дорого", cat:"шопинг", lvl:"A1", ex:"Too expensive.", exru:"Слишком дорого."},
-  {w:"afford", ipa:"/əˈfɔːd/", ru:"позволить себе", cat:"шопинг", lvl:"B1", ex:"I cannot afford it.", exru:"Я не могу себе это позволить."},
-  {w:"bargain", ipa:"/ˈbɑːɡɪn/", ru:"выгодная покупка", cat:"шопинг", lvl:"B1", ex:"It is a bargain.", exru:"Это выгодная покупка."},
-  {w:"invoice", ipa:"/ˈɪnvɔɪs/", ru:"счёт фактура", cat:"шопинг", lvl:"B2", ex:"Send the invoice.", exru:"Отправь счёт-фактуру."},
-  {w:"wallet", ipa:"/ˈwɒlɪt/", ru:"кошелёк", cat:"шопинг", lvl:"A1", ex:"My wallet is empty.", exru:"Мой кошелёк пуст."},
-  {w:"cash", ipa:"/kæʃ/", ru:"наличные", cat:"шопинг", lvl:"A1", ex:"Pay in cash.", exru:"Плати наличными."},
-  {w:"coin", ipa:"/kɔɪn/", ru:"монета", cat:"шопинг", lvl:"A1", ex:"A rare coin.", exru:"Редкая монета."},
-  {w:"card", ipa:"/kɑːd/", ru:"банковская карта", cat:"шопинг", lvl:"A1", ex:"Pay by card.", exru:"Плати картой."},
-  {w:"brand", ipa:"/brænd/", ru:"бренд", cat:"шопинг", lvl:"B1", ex:"A famous brand.", exru:"Известный бренд."},
-  {w:"quality", ipa:"/ˈkwɒləti/", ru:"качество", cat:"шопинг", lvl:"B1", ex:"Good quality.", exru:"Хорошее качество."},
-  {w:"customer", ipa:"/ˈkʌstəmə/", ru:"покупатель", cat:"шопинг", lvl:"A2", ex:"The customer left.", exru:"Покупатель ушёл."},
-  {w:"return", ipa:"/rɪˈtɜːn/", ru:"возвращать товар", cat:"шопинг", lvl:"B1", ex:"Can I return this?", exru:"Можно это вернуть?"},
-  {w:"exchange", ipa:"/ɪksˈtʃeɪndʒ/", ru:"обменять", cat:"шопинг", lvl:"B2", ex:"Exchange the item.", exru:"Обменяй товар."},
-  {w:"online", ipa:"/ˌɒnˈlaɪn/", ru:"онлайн", cat:"шопинг", lvl:"A2", ex:"Shop online.", exru:"Покупай онлайн."},
-  {w:"delivery", ipa:"/dɪˈlɪvəri/", ru:"доставка", cat:"шопинг", lvl:"B1", ex:"Free delivery.", exru:"Бесплатная доставка."},
-  {w:"package", ipa:"/ˈpækɪdʒ/", ru:"посылка", cat:"шопинг", lvl:"A2", ex:"The package arrived.", exru:"Посылка пришла."},
-  {w:"gift", ipa:"/ɡɪft/", ru:"подарок", cat:"шопинг", lvl:"A1", ex:"A nice gift.", exru:"Милый подарок."},
-  {w:"toy", ipa:"/tɔɪ/", ru:"игрушка", cat:"шопинг", lvl:"A1", ex:"A child toy.", exru:"Детская игрушка."},
-  {w:"furniture", ipa:"/ˈfɜːnɪtʃə/", ru:"мебель", cat:"шопинг", lvl:"B1", ex:"New furniture.", exru:"Новая мебель."},
-  {w:"appliance", ipa:"/əˈplaɪəns/", ru:"бытовой прибор", cat:"шопинг", lvl:"B1", ex:"A kitchen appliance.", exru:"Кухонный прибор."},
-  {w:"coupon", ipa:"/ˈkuːpɒn/", ru:"купон", cat:"шопинг", lvl:"B1", ex:"Use a coupon.", exru:"Используй купон."},
-  {w:"refund", ipa:"/ˈriːfʌnd/", ru:"возврат денег", cat:"шопинг", lvl:"B1", ex:"Ask for a refund.", exru:"Попроси возврат."},
-  {w:"cool", ipa:"/kuːl/", ru:"круто", cat:"люди", lvl:"B1", ex:"That is cool!", exru:"Это круто!"},
-  {w:"awesome", ipa:"/ˈɔːsəm/", ru:"потрясающе", cat:"люди", lvl:"A2", ex:"Awesome job!", exru:"Потрясающе!"},
-  {w:"chill", ipa:"/tʃɪl/", ru:"расслабляться", cat:"люди", lvl:"B1", ex:"Let us chill.", exru:"Давай расслабимся."},
-  {w:"broke", ipa:"/brəʊk/", ru:"без денег", cat:"люди", lvl:"B1", ex:"I am broke.", exru:"Я без денег."},
-  {w:"hang out", ipa:"/hæŋ aʊt/", ru:"тусоваться", cat:"люди", lvl:"B1", ex:"Hang out later?", exru:"Тусанем позже?"},
-  {w:"buddy", ipa:"/ˈbʌdi/", ru:"приятель", cat:"люди", lvl:"A2", ex:"He is my buddy.", exru:"Он мой приятель."},
-  {w:"kid", ipa:"/kɪd/", ru:"ребёнок", cat:"люди", lvl:"A1", ex:"How are the kids?", exru:"Как дети?"},
-  {w:"gotta", ipa:"/ˈɡɒtə/", ru:"должен сокр", cat:"люди", lvl:"B1", ex:"I gotta go.", exru:"Мне пора идти."},
-  {w:"wanna", ipa:"/ˈwɒnə/", ru:"хочу сокр", cat:"люди", lvl:"A1", ex:"Wanna eat?", exru:"Хочешь поесть?"},
-  {w:"kinda", ipa:"/ˈkaɪndə/", ru:"вроде сокр", cat:"люди", lvl:"B1", ex:"It is kinda late.", exru:"Вроде уже поздно."},
-  {w:"sure thing", ipa:"/ʃɔː θɪŋ/", ru:"конечно", cat:"люди", lvl:"B1", ex:"Sure thing!", exru:"Конечно!"},
-  {w:"no way", ipa:"/nəʊ weɪ/", ru:"не может быть", cat:"люди", lvl:"B1", ex:"No way!", exru:"Не может быть!"},
-  {w:"whatever", ipa:"/wɒtˈevə/", ru:"всё равно", cat:"люди", lvl:"B1", ex:"Whatever you say.", exru:"Как скажешь."},
-  {w:"gross", ipa:"/ɡrəʊs/", ru:"противно", cat:"люди", lvl:"B1", ex:"That is gross.", exru:"Это противно."},
-  {w:"sick", ipa:"/sɪk/", ru:"круто сленг", cat:"люди", lvl:"B2", ex:"Sick trick!", exru:"Крутой трюк!"},
-  {w:"lit", ipa:"/lɪt/", ru:"огонь сленг", cat:"люди", lvl:"B2", ex:"The party was lit.", exru:"Тусовка была огонь."},
-  {w:"ghost", ipa:"/ɡəʊst/", ru:"игнорировать сленг", cat:"люди", lvl:"B2", ex:"He ghosted me.", exru:"Он меня проигнорировал."},
-  {w:"flex", ipa:"/fleks/", ru:"хвастаться сленг", cat:"люди", lvl:"B2", ex:"Stop flexing.", exru:"Хватит хвастаться."},
-  {w:"vibe", ipa:"/vaɪb/", ru:"вайб атмосфера", cat:"люди", lvl:"B1", ex:"Good vibes.", exru:"Хороший вайб."},
-  {w:"lowkey", ipa:"/ˈləʊki/", ru:"втайне", cat:"люди", lvl:"B2", ex:"I lowkey like it.", exru:"Я втайне это люблю."},
-  {w:"salty", ipa:"/ˈsɔːlti/", ru:"обиженный сленг", cat:"люди", lvl:"B2", ex:"Do not be salty.", exru:"Не обижайся."},
-  {w:"cap", ipa:"/kæp/", ru:"ложь сленг", cat:"люди", lvl:"B2", ex:"No cap.", exru:"Честно."},
-  {w:"clutch", ipa:"/klʌtʃ/", ru:"выручить сленг", cat:"люди", lvl:"B2", ex:"You clutched it.", exru:"Ты выручил."},
-  {w:"deal", ipa:"/diːl/", ru:"по рукам", cat:"люди", lvl:"A2", ex:"It is a deal.", exru:"По рукам."},
-  {w:"nuts", ipa:"/nʌts/", ru:"сумасшедший", cat:"люди", lvl:"B1", ex:"He is nuts.", exru:"Он сумасшедший."},
-  {w:"tight", ipa:"/taɪt/", ru:"круто сленг", cat:"люди", lvl:"B1", ex:"That is tight.", exru:"Это круто."},
-  {w:"wired", ipa:"/ˈwaɪəd/", ru:"на взводе", cat:"люди", lvl:"B1", ex:"I am wired.", exru:"Я на взводе."},
-  {w:"zonked", ipa:"/zɒŋkt/", ru:"вымотан", cat:"люди", lvl:"B2", ex:"I am zonked.", exru:"Я вымотан."},
-  {w:"dough", ipa:"/dəʊ/", ru:"деньги сленг", cat:"работа", lvl:"B1", ex:"Need some dough.", exru:"Нужны деньги."},
-  {w:"gig", ipa:"/ɡɪɡ/", ru:"работёнка сленг", cat:"работа", lvl:"B1", ex:"A freelance gig.", exru:"Фриланс-работа."}
+  {w:"luxury", ipa:"/ˈlʌkʃəri/", ru:"роскошь", cat:"шопинг", lvl:"C1", ex:"A long bath is a luxury.", exru:"Долгая ванна — это роскошь."}
 ];
 
 WORDS.forEach((w,i)=>{ w._i = i; });
@@ -4294,8 +4130,6 @@ function levelDone(lvl){
   const list = WORDS.filter(w=>w.lvl===lvl);
   return list.length > 0 && countLearned(list) === list.length;
 }
-
-
 
 /* ---------- "difficult for me" star flag, independent of learned/unlearned ---------- */
 const STARRED_KEY = 'vocab_kartoteka_starred_v1';
@@ -4782,7 +4616,6 @@ function openLibrary(opts){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
-  
   libEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('library');
@@ -4828,7 +4661,6 @@ function goHome(){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
-  
   homeEl.style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   buildHome();
@@ -4961,7 +4793,6 @@ function openProfile(){
   document.getElementById('quizView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
-  
   document.getElementById('profileView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('profile');
@@ -5022,7 +4853,6 @@ function openQuizLevelPicker(){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizView').style.display = 'none';
   const mv0 = document.getElementById('matchView'); if(mv0) mv0.style.display = 'none';
-  
   document.getElementById('quizLevelPicker').style.display = 'block';
   setActiveBottomNav('quiz');
   wizReset();
@@ -5107,7 +4937,6 @@ function startQuiz(origin, explicitWords){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
   const mv = document.getElementById('matchView'); if(mv) mv.style.display = 'none';
-  
   document.getElementById('quizView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('quiz');
@@ -5219,7 +5048,6 @@ function startMatch(lvlId){
   document.getElementById('profileView').style.display = 'none';
   document.getElementById('quizView').style.display = 'none';
   document.getElementById('quizLevelPicker').style.display = 'none';
-  
   document.getElementById('matchView').style.display = 'block';
   window.scrollTo({top:0, behavior:'smooth'});
   setActiveBottomNav('quiz');
@@ -5625,6 +5453,7 @@ function buildTopicTabs(){
   });
 }
 
+
 function render(){
   const q = query.trim().toLowerCase();
 
@@ -5945,7 +5774,6 @@ if(bottomNav){
       else if(view === 'library') openLibrary({});
       else if(view === 'quiz') openQuizLevelPicker();
       else if(view === 'profile') openProfile();
-      
       setActiveBottomNav(view);
     });
   });
@@ -5960,7 +5788,6 @@ if(mainNavEl){
       else if(v === 'library') openLibrary({});
       else if(v === 'quiz') openQuizLevelPicker();
       else if(v === 'profile') openProfile();
-      
     });
   });
 }
@@ -6030,8 +5857,75 @@ function lkEmpty(){
 function lkNotFound(q){
   const alt = isCyr(q) ? 'победа' : 'ocean';
   entryInside.classList.remove('show'); entryInside.innerHTML='';
-  lookupCard.innerHTML = `<p class="lk-empty">Слово «<b>${q}</b>» пока не в словаре. Попробуйте другое — например, <b>${alt}</b>.</p>`;
+  lookupCard.innerHTML = `
+    <div class="lk-nf">
+      <span class="lk-nf-icon">🔍</span>
+      <div class="lk-nf-body">
+        <p class="lk-nf-title">Слова «${q}» пока нет в словаре</p>
+        <p class="lk-nf-sub">Попробуйте похожее — например, <button type="button" class="lk-chip" id="lkAltChip">${alt}</button>, или нажмите «Найти» ещё раз — переведём через AI</p>
+      </div>
+    </div>`;
   lookupCard.classList.add('show');
+  const altChip = document.getElementById('lkAltChip');
+  if(altChip) altChip.addEventListener('click', ()=>{ lookupInput.value = alt; runLookup(); lookupInput.focus(); });
+}
+/* ---------- free AI/MT fallback translation (Google Translate + MyMemory) ---------- */
+async function tryGoogleTranslate(q, from, to){
+  const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${from}&tl=${to}&dt=t&q=${encodeURIComponent(q)}`;
+  const res = await fetch(url);
+  if(!res.ok) throw new Error('google bad status');
+  const data = await res.json();
+  const translated = data && data[0] && data[0].map(seg => seg[0]).join('');
+  if(!translated || !translated.trim()) throw new Error('google empty');
+  return translated.trim();
+}
+async function tryMyMemory(q, from, to){
+  const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(q)}&langpair=${from}|${to}`);
+  if(!res.ok) throw new Error('mymemory bad status');
+  const data = await res.json();
+  if(data.responseStatus && Number(data.responseStatus) !== 200) throw new Error('mymemory status ' + data.responseStatus);
+  const translated = data && data.responseData && data.responseData.translatedText;
+  if(!translated || /invalid|error/i.test(translated)) throw new Error('mymemory no translation');
+  if(translated.trim().toLowerCase() === q.trim().toLowerCase()) throw new Error('mymemory echoed input');
+  return translated.trim();
+}
+async function autoAiTranslate(raw){
+  const q = raw.trim();
+  if(!q) return;
+  lookupCard.classList.remove('show'); lookupCard.innerHTML='';
+  entryInside.classList.add('show');
+  entryInside.innerHTML = `
+    <div class="lk-ai-loading-row">
+      <span class="lk-ai-spinner"></span> Переводим «${q}» через AI…
+    </div>`;
+  const fromRu = isCyr(q);
+  const from = fromRu ? 'ru' : 'en';
+  const to = fromRu ? 'en' : 'ru';
+  let translated = null;
+  try{ translated = await tryGoogleTranslate(q, from, to); }
+  catch(err){ /* fall through to backup */ }
+  if(!translated){
+    try{ translated = await tryMyMemory(q, from, to); }
+    catch(err){ /* both failed */ }
+  }
+  if(translated){
+    const enWord = fromRu ? translated : q;
+    const ruWord = fromRu ? q : translated;
+    entryInside.innerHTML = `
+      <div class="lk-top">
+        <span class="lk-word">${enWord}</span>
+        <span class="lk-level lk-level-ai">✨ AI</span>
+      </div>
+      <p class="lk-ru">${ruWord}</p>
+      <p class="lk-ai-disclaimer">Перевод сгенерирован автоматически и не проверялся вручную — используйте как подсказку.</p>`;
+  } else {
+    entryInside.innerHTML = `
+      <div class="lk-top">
+        <span class="lk-word">${q}</span>
+        <span class="lk-level lk-level-ai">✨ AI</span>
+      </div>
+      <p class="lk-ai-disclaimer">⚠️ Не получилось перевести это слово — сервисы перевода недоступны или превышен лимит запросов. Попробуйте ещё раз чуть позже.</p>`;
+  }
 }
 function lkEntry(item){
   lookupCard.classList.remove('show'); lookupCard.innerHTML='';
@@ -6061,7 +5955,7 @@ function lkList(items){
     b.addEventListener('click', ()=> lkEntry(WORDS[+b.dataset.i]));
   });
 }
-function runLookup(){
+function runLookup(isSubmit){
   const raw = lookupInput.value.trim();
   if(!raw){ lkEmpty(); return; }
   const q = raw.toLowerCase();
@@ -6072,16 +5966,19 @@ function runLookup(){
   const starts = WORDS.filter(it => val(it).startsWith(needle));
   const rest = WORDS.filter(it => !val(it).startsWith(needle) && val(it).includes(needle));
   const list = starts.concat(rest).slice(0, 20);
-  if(!list.length){ lkNotFound(raw); return; }
+  if(!list.length){
+    if(isSubmit){ autoAiTranslate(raw); } else { lkNotFound(raw); }
+    return;
+  }
   const exact = list.find(it => val(it) === needle);
   if(exact){ lkEntry(exact); return; }
   lkList(list);
 }
-lookupInput.addEventListener('input', runLookup);
+lookupInput.addEventListener('input', ()=> runLookup(false));
 const lookupBtnEl = document.getElementById('lookupBtn');
-if(lookupBtnEl) lookupBtnEl.addEventListener('click', runLookup);
+if(lookupBtnEl) lookupBtnEl.addEventListener('click', ()=> runLookup(true));
 lookupInput.addEventListener('keydown', (e)=>{
-  if(e.key === 'Enter'){ e.preventDefault(); runLookup(); }
+  if(e.key === 'Enter'){ e.preventDefault(); runLookup(true); }
 });
 const statWords = document.getElementById('statWords');
 const statExamples = document.getElementById('statExamples');
