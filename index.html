@@ -501,6 +501,7 @@
   .empty p{font-family:'Nunito',sans-serif;font-size:13px;margin:0;}
 
   .topic-prompt{text-align:center;padding:70px 20px;color:var(--ink-faint);}
+  .grid-loading{grid-column:1/-1;text-align:center;padding:30px 10px;color:var(--ink-faint);font-size:13px;font-family:'Nunito',sans-serif;}
   .topic-prompt svg{width:32px;height:32px;margin-bottom:14px;opacity:.5;color:var(--teal);}
   .topic-prompt p{font-family:'Nunito',sans-serif;font-size:13px;margin:0;}
 
@@ -769,40 +770,23 @@
   .mylist-actions{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0 26px;}
   .mylist-review-btn{background:var(--teal);box-shadow:0 10px 22px -10px rgba(15,118,110,.5);}
   .mylist-review-btn:disabled{opacity:.45;cursor:default;box-shadow:none;}
-  .mylist-hint{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-faint);margin:-14px 0 20px;letter-spacing:.01em;}
-  .mylist-hint .mh-count{font-family:'Nunito',sans-serif;font-weight:700;color:var(--teal);}
   .mylist-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
-  .mylist-card{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:18px 16px;overflow:hidden;opacity:0;transform:translateY(14px) scale(.97);animation:mylistIn .3s cubic-bezier(.2,.8,.3,1) forwards;transform-origin:top center;}
-  .mylist-card::before{content:'';position:absolute;left:0;top:0;width:100%;height:3px;background:linear-gradient(90deg,var(--teal),var(--amber));opacity:0;transition:opacity .22s;}
-  .mylist-card::after{content:'';position:absolute;inset:0;border-radius:16px;background:radial-gradient(120% 60% at 50% 0%,rgba(251,113,133,.06),transparent 60%);opacity:0;transition:opacity .22s;pointer-events:none;}
-  .mylist-card:hover::before,.mylist-card:hover::after{opacity:1;}
-  .mylist-card{transition:transform .18s,box-shadow .18s,border-color .18s,opacity .22s,filter .22s;}
-  .mylist-card:hover{transform:translateY(-4px) scale(1.02);border-color:var(--teal-dim);box-shadow:0 16px 30px -14px rgba(251,113,133,.35),0 1px 0 rgba(0,0,0,.15);}
-  html[data-theme="light"] .mylist-card:hover{border-color:rgba(225,29,72,.35);box-shadow:0 16px 30px -14px rgba(225,29,72,.28);}
-  .mylist-card:active{transform:translateY(-1px) scale(.99);}
-  .mylist-card.removing{opacity:0;transform:scale(.82) translateY(8px);filter:blur(3px);pointer-events:none;transition:opacity .2s ease,transform .2s ease,filter .2s ease;}
-  .mylist-card-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:var(--ink);margin-bottom:4px;padding-right:20px;line-height:1.2;}
-  .mylist-card-word:hover .mylist-w-speak{color:var(--teal);}
+  .mylist-card{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:16px;padding:18px 16px;transition:transform .14s,border-color .14s;}
+  .mylist-card:hover{transform:translateY(-2px);border-color:var(--rule-strong);}
+  .mylist-card-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:var(--ink);margin-bottom:4px;padding-right:20px;}
   .mylist-card-ru{color:var(--ink-dim);font-size:14px;}
-  .mylist-del{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;border:none;background:var(--card-hover);color:var(--ink-faint);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,color .15s,transform .15s;z-index:2;}
-  .mylist-del:hover{background:var(--amber-dim);color:var(--amber);transform:rotate(90deg) scale(1.08);}
-  .mylist-del:active{transform:rotate(90deg) scale(.9);}
-  .mylist-elv{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-family:'Nunito',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.06em;padding:3px 9px;border-radius:20px;}
-  .mylist-elv b{font-weight:800;}
-  .mylist-elv-e{width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.85;}
-  .mylist-elv.lvl-A1{background:#4a2420;color:#ff9e93;} .mylist-elv.lvl-A2{background:#451e1a;color:#ff7a6b;}
-  .mylist-elv.lvl-B1{background:#3f1a1f;color:#f2545f;} .mylist-elv.lvl-B2{background:#3d1420;color:#e0384f;}
-  .mylist-elv.lvl-C1{background:#380f1d;color:#c22a4a;} .mylist-elv.lvl-C2{background:#300b18;color:#9c1f42;}
+  .mylist-del{position:absolute;top:12px;right:12px;width:24px;height:24px;border-radius:50%;border:none;background:var(--card-hover);color:var(--ink-faint);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s,color .15s;}
+  .mylist-del:hover{background:var(--amber-dim);color:var(--amber);}
   .mylist-ai-badge{display:inline-block;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--teal);background:var(--teal-dim);padding:2px 8px;border-radius:7px;font-weight:800;margin-bottom:8px;}
-  .mylist-empty{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:60px 20px;color:var(--ink-faint);animation:mylistIn .4s cubic-bezier(.2,.8,.3,1);}
-  .mylist-empty-icon{font-size:38px;display:inline-block;animation:mylistFloat 3s ease-in-out infinite;filter:drop-shadow(0 6px 12px rgba(251,113,133,.25));}
+  .mylist-empty{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:60px 20px;color:var(--ink-faint);}
+  .mylist-status{color:var(--ink-dim);font-size:13.5px;margin:4px 0 0;}
+  .mylist-learned-row{margin:0 0 18px;display:flex;justify-content:center;}
+  .mylist-learned-btn{display:inline-flex;align-items:center;gap:8px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--ink-dim);background:var(--card);border:1px solid var(--rule-strong);border-radius:20px;padding:9px 18px;cursor:pointer;transition:background .15s,border-color .15s,color .15s;}
+  .mylist-learned-btn:hover{border-color:var(--teal);}
+  .mylist-learned-btn.active{background:var(--teal-dim);border-color:var(--teal);color:var(--teal);}
+  .mylist-review-actions{display:flex;align-items:center;gap:10px;justify-content:center;}
+  .mylist-empty-icon{font-size:36px;}
   .mylist-empty p{max-width:340px;margin:0;font-size:13.5px;line-height:1.5;}
-  @keyframes mylistIn{to{opacity:1;transform:translateY(0) scale(1);}}
-  @keyframes mylistFloat{0%,100%{transform:translateY(0) rotate(-3deg);}50%{transform:translateY(-10px) rotate(4deg);}}
-  @keyframes mylistFlashIn{from{opacity:0;transform:scale(.92) translateY(14px);}to{opacity:1;transform:scale(1) translateY(0);}}
-  @keyframes mylistFlashOut{from{opacity:1;transform:translateX(0) scale(1);}to{opacity:0;transform:translateX(-40px) scale(.94);}}
-  @keyframes mylistPop{0%{opacity:0;transform:scale(.7);}100%{opacity:1;transform:scale(1);}}
-  @keyframes mylistSlideIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
   .mylist-add-box{width:min(440px,92vw);}
   .mylist-add-search{display:flex;gap:8px;margin:14px 0 4px;}
@@ -820,32 +804,27 @@
   .mylist-ai-pair b{font-weight:800;}
 
   .mylist-review-inner{width:min(480px,100%);text-align:center;}
-  .game-back{display:inline-flex;align-items:center;gap:7px;font-family:'Nunito',sans-serif;font-size:13px;color:var(--ink-dim);background:var(--card);border:1px solid var(--rule);border-radius:999px;padding:9px 16px;cursor:pointer;letter-spacing:.01em;transition:border-color .15s,color .15s,transform .15s,box-shadow .15s,background .15s;}
-  .game-back svg{width:14px;height:14px;transition:transform .2s;}
-  .game-back:hover{border-color:var(--rule-strong);color:var(--ink);background:var(--card-hover);box-shadow:0 6px 16px -8px rgba(0,0,0,.35);}
-  .game-back:hover svg{transform:translateX(-2px);}
-  .game-back:active{transform:scale(.95);}
   .mylist-flash{margin:20px 0;}
-  .mylist-flash-card{position:relative;width:100%;min-height:190px;perspective:1200px;cursor:pointer;animation:mylistFlashIn .4s cubic-bezier(.2,.8,.3,1);}
-  .mylist-flash-card-inner{position:relative;width:100%;height:100%;min-height:190px;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.15,.2,1);}
-  .mylist-flash-card.flipped .mylist-flash-card-inner{transform:rotateY(180deg);}
-  .mylist-flash-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:40px 24px;}
-  .mylist-flash-face:hover{border-color:var(--teal);}
-  .mylist-flash-face.back{transform:rotateY(180deg);background:var(--panel);border-color:var(--teal-dim);}
-  .mylist-flash-card.flipped:hover .mylist-flash-face{border-color:var(--teal-dim);}
+  .mylist-flash-card{background:var(--card);border:1px solid var(--rule);border-radius:20px;padding:50px 24px;cursor:pointer;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:border-color .15s;}
+  .mylist-flash-card:hover{border-color:var(--teal);}
   .mylist-flash-word{font-family:'Nunito',sans-serif;font-weight:800;font-size:30px;color:var(--ink);}
   .mylist-flash-ru{font-size:20px;color:var(--teal);font-weight:700;}
-  .mylist-flash-hint{font-size:12px;color:var(--ink-faint);opacity:.85;}
-  .mylist-flash-card.leaving{animation:mylistFlashOut .18s ease forwards;pointer-events:none;}
+  .mylist-flash-hint{font-size:12px;color:var(--ink-faint);}
   .mylist-review-actions{display:flex;gap:10px;justify-content:center;}
-  .mylist-done{font-family:'Nunito',sans-serif;font-size:20px;font-weight:700;color:var(--ink);padding:50px 20px;animation:mylistPop .5s cubic-bezier(.2,.9,.3,1.3);}
-  .ml-progress-anim{animation:mylistSlideIn .3s cubic-bezier(.2,.8,.3,1);}
+  .mylist-done{font-family:'Nunito',sans-serif;font-size:20px;font-weight:700;color:var(--ink);padding:50px 20px;}
   @media(max-width:560px){
     .mylist-grid{grid-template-columns:repeat(2,1fr);}
     .mylist-actions{flex-direction:column;}
     .mylist-actions .start-btn{width:100%;justify-content:center;}
   }
   .lk-open{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-weight:600;font-size:12.5px;color:var(--amber);background:none;border:none;cursor:pointer;padding:0;}
+  .lk-entry-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .lk-ai-check{margin-top:14px;font-family:'Nunito',sans-serif;font-weight:600;font-size:12.5px;color:var(--teal);background:none;border:none;cursor:pointer;padding:0;}
+  .lk-ai-check:hover{text-decoration:underline;}
+  .lk-ai-check:disabled{opacity:.5;cursor:default;text-decoration:none;}
+  .lk-ai-inline-card{margin-top:14px;padding-top:14px;border-top:1px dashed var(--rule);}
+  .lk-ai-inline-text{font-size:14px;color:var(--ink);margin:8px 0 0;}
+  .lk-ai-fail-inline{margin-top:14px;padding-top:14px;border-top:1px dashed var(--rule);font-size:12.5px;color:var(--ink-faint);}
   .lk-open:hover{text-decoration:underline;}
 
   .t-topics{grid-area:topics;}
@@ -1126,7 +1105,7 @@
       <button type="button" class="main-nav-link active" data-nav="home">Главная</button>
       <button type="button" class="main-nav-link" data-nav="library">Все слова</button>
       <button type="button" class="main-nav-link" data-nav="quiz">Тренировка</button>
-      <button type="button" class="main-nav-link" data-nav="mylist">Мой список</button>
+      <button type="button" class="main-nav-link" data-nav="mylist">Повторения</button>
     </nav>
     <span class="chip-res">🔥<b id="hdrStreak">0</b></span>
       <span class="chip-res xp-chip"><i class="xp-mini" style="display:inline-flex;"><i id="hdrXpFill" style="width:0%"></i></i><b id="hdrPct">0%</b></span>
@@ -1419,16 +1398,16 @@
 <div id="mylistView" class="wrap">
   <div class="lib-header">
     <div>
-      <span class="tile-cap">Мой список</span>
+      <span class="tile-cap">Повторения</span>
       <h2 class="tile-title" style="margin:4px 0 6px;">Слова для повторения</h2>
-      <p class="mylist-sub">Добавляйте слова, которые не хотите забыть — и заходите повторять их, например, раз в день.</p>
+      <p class="mylist-sub">Добавляйте слова, которые не хотите забыть, а когда будет удобно — нажимайте «Повторить» и проходите их карточками.</p>
     </div>
   </div>
   <div class="mylist-actions">
     <button type="button" class="start-btn" id="mylistAddBtn">+ Добавить слово</button>
     <button type="button" class="start-btn mylist-review-btn" id="mylistReviewBtn">▶ Повторить <span id="mylistReviewCount"></span></button>
   </div>
-  <div class="mylist-grid" id="mylistGrid"></div>
+  <p class="mylist-status" id="mylistStatus"></p>
   <div class="mylist-empty" id="mylistEmpty">
     <span class="mylist-empty-icon">📌</span>
     <p>Пока пусто. Добавьте первое слово — и оно будет ждать вас здесь для повторения.</p>
@@ -1437,12 +1416,9 @@
 
 <div id="mylistReviewOv" class="onboard" hidden>
   <div class="onboard-inner mylist-review-inner">
-    <button type="button" class="game-back" id="mylistReviewClose">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Закрыть
-    </button>
     <p class="quiz-progress-label" id="mylistReviewProgress"></p>
     <div class="mylist-flash" id="mylistFlash"></div>
+    <div class="mylist-learned-row" id="mylistLearnedRow"></div>
     <div class="mylist-review-actions" id="mylistReviewActions"></div>
   </div>
 </div>
@@ -1558,9 +1534,9 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
     Словарь
   </button>
-  <button type="button" data-view="mylist" aria-label="Мой список">
+  <button type="button" data-view="mylist" aria-label="Повторения">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-4-7 4V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
-    Список
+    Повторения
   </button>
   <button type="button" data-view="profile" aria-label="Профиль">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -5610,6 +5586,106 @@ function buildTopicTabs(){
 }
 
 
+let libSectionObserver = null;
+function cardHtml(item){
+  const idx = item._i;
+  const learned = isLearned(item);
+  const starred = isStarred(item);
+  return `
+  <div class="card lvl-${item.lvl}${learned ? ' is-learned' : ''}" data-idx="${idx}" tabindex="0" role="button" aria-label="Карточка со словом ${item.w}, нажмите чтобы перевернуть">
+    <div class="card-inner">
+      <div class="face front">
+        <button class="star-toggle${starred ? ' active' : ''}" data-idx="${idx}" aria-label="${starred ? 'Убрать из сложных' : 'Отметить как сложное'}" title="${starred ? 'Сложное слово' : 'Отметить как сложное'}">
+          <svg viewBox="0 0 24 24" fill="${starred ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2.5 14.9 9 22 9.6 16.6 14.2 18.2 21 12 17.3 5.8 21 7.4 14.2 2 9.6 9.1 9 12 2.5"/></svg>
+        </button>
+        <button class="learn-toggle${learned ? ' active' : ''}" data-idx="${idx}" aria-label="${learned ? 'Убрать отметку выучено' : 'Отметить как выученное'}" title="${learned ? 'Выучено' : 'Отметить как выученное'}">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </button>
+        <div class="guide"><span class="lvl-chip chip-${item.lvl}">${item.lvl}</span><span>${item.cat}</span></div>
+        <div class="word-row">
+          <div class="word">${dw(item)}${isVerbItem(item) ? ' <span class="pos-tag">гл.</span>' : ''}</div>
+          ${canSpeak ? `<button class="speak-btn" data-word="${item.w.replace(/"/g,'&quot;')}" aria-label="Прослушать произношение" title="Прослушать">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
+          </button>` : ''}
+        </div>
+        <div class="ipa">${item.ipa}</div>
+        <div class="translate">${item.ru}</div>
+        <div class="hint">пример</div>
+      </div>
+      <div class="face back">
+        <div class="label-row">
+          <div class="label">пример</div>
+          ${canSpeak ? `<button class="speak-btn" data-example="${item.ex.replace(/"/g,'&quot;')}" aria-label="Прослушать пример" title="Прослушать пример">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
+          </button>` : ''}
+        </div>
+        <p class="example">${item.ex}</p>
+        <p class="example-ru">${item.exru}</p>
+      </div>
+    </div>
+  </div>`;
+}
+function wireCardGridHandlers(container){
+  if(!container) return;
+  container.querySelectorAll('.card').forEach(card=>{
+    if(card.dataset.wired) return;
+    card.dataset.wired = '1';
+    card.addEventListener('click', ()=> card.classList.toggle('flipped'));
+    card.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        card.classList.toggle('flipped');
+      }
+    });
+  });
+  container.querySelectorAll('.star-toggle').forEach(btn=>{
+    if(btn.dataset.wired) return;
+    btn.dataset.wired = '1';
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const item = WORDS[+btn.dataset.idx];
+      toggleStarred(item);
+      const nowStarred = isStarred(item);
+      btn.classList.toggle('active', nowStarred);
+      btn.querySelector('svg').setAttribute('fill', nowStarred ? 'currentColor' : 'none');
+      btn.title = nowStarred ? 'Сложное слово' : 'Отметить как сложное';
+      if(onlyStarred) render();
+    });
+  });
+  container.querySelectorAll('.learn-toggle').forEach(btn=>{
+    if(btn.dataset.wired) return;
+    btn.dataset.wired = '1';
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const item = WORDS[+btn.dataset.idx];
+      toggleLearned(item);
+      const nowLearned = isLearned(item);
+      btn.classList.toggle('active', nowLearned);
+      const hostCard = btn.closest('.card') || btn.closest('.word-row-item');
+      if(hostCard) hostCard.classList.toggle('is-learned', nowLearned);
+      btn.title = nowLearned ? 'Выучено' : 'Отметить как выученное';
+      updateStats(currentFilteredWords());
+      if(nowLearned) checkNewAchievements();
+      if(onlyUnlearned) render();
+    });
+  });
+  container.querySelectorAll('.speak-btn').forEach(btn=>{
+    if(btn.dataset.wired) return;
+    btn.dataset.wired = '1';
+    btn.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      speak(btn.dataset.example || btn.dataset.word);
+    });
+  });
+}
+function mountGridSection(gridEl){
+  if(!gridEl || gridEl._lazyDone) return;
+  const items = gridEl._lazyItems || [];
+  gridEl.innerHTML = items.map(cardHtml).join('');
+  gridEl._lazyDone = true;
+  wireCardGridHandlers(gridEl);
+  if(libSectionObserver) libSectionObserver.unobserve(gridEl);
+}
 function render(){
   const q = query.trim().toLowerCase();
 
@@ -5626,45 +5702,6 @@ function render(){
   }
 
   const filtered = currentFilteredWords();
-
-  const cardHtml = (item)=>{
-    const idx = item._i;
-    const learned = isLearned(item);
-    const starred = isStarred(item);
-    return `
-    <div class="card lvl-${item.lvl}${learned ? ' is-learned' : ''}" data-idx="${idx}" tabindex="0" role="button" aria-label="Карточка со словом ${item.w}, нажмите чтобы перевернуть">
-      <div class="card-inner">
-        <div class="face front">
-          <button class="star-toggle${starred ? ' active' : ''}" data-idx="${idx}" aria-label="${starred ? 'Убрать из сложных' : 'Отметить как сложное'}" title="${starred ? 'Сложное слово' : 'Отметить как сложное'}">
-            <svg viewBox="0 0 24 24" fill="${starred ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2.5 14.9 9 22 9.6 16.6 14.2 18.2 21 12 17.3 5.8 21 7.4 14.2 2 9.6 9.1 9 12 2.5"/></svg>
-          </button>
-          <button class="learn-toggle${learned ? ' active' : ''}" data-idx="${idx}" aria-label="${learned ? 'Убрать отметку выучено' : 'Отметить как выученное'}" title="${learned ? 'Выучено' : 'Отметить как выученное'}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          </button>
-          <div class="guide"><span class="lvl-chip chip-${item.lvl}">${item.lvl}</span><span>${item.cat}</span></div>
-          <div class="word-row">
-            <div class="word">${dw(item)}${isVerbItem(item) ? ' <span class="pos-tag">гл.</span>' : ''}</div>
-            ${canSpeak ? `<button class="speak-btn" data-word="${item.w.replace(/"/g,'&quot;')}" aria-label="Прослушать произношение" title="Прослушать">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
-            </button>` : ''}
-          </div>
-          <div class="ipa">${item.ipa}</div>
-          <div class="translate">${item.ru}</div>
-          <div class="hint">пример</div>
-        </div>
-        <div class="face back">
-          <div class="label-row">
-            <div class="label">пример</div>
-            ${canSpeak ? `<button class="speak-btn" data-example="${item.ex.replace(/"/g,'&quot;')}" aria-label="Прослушать пример" title="Прослушать пример">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7"/></svg>
-            </button>` : ''}
-          </div>
-          <p class="example">${item.ex}</p>
-          <p class="example-ru">${item.exru}</p>
-        </div>
-      </div>
-    </div>`;
-  };
 
   const listHtml = (item)=>{
     const idx = item._i;
@@ -5702,9 +5739,27 @@ function render(){
       const items = filtered.filter(item=>item.cat===t.id);
       return `<div class="topic-section" id="sec-${t.id}">
         <div class="topic-section-head"><h3>${t.name}</h3><span>${items.length} слов</span></div>
-        <div class="grid">${items.map(cardHtml).join('')}</div>
+        <div class="grid" id="grid-${t.id}"><div class="grid-loading">Загружаем слова…</div></div>
       </div>`;
     }).join('');
+
+    if(libSectionObserver) libSectionObserver.disconnect();
+    libSectionObserver = ('IntersectionObserver' in window) ? new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{ if(entry.isIntersecting) mountGridSection(entry.target); });
+    }, { rootMargin: '900px 0px' }) : null;
+
+    presentTopics.forEach((t, idx)=>{
+      const items = filtered.filter(item=>item.cat===t.id);
+      const gridEl = document.getElementById('grid-' + t.id);
+      if(!gridEl) return;
+      gridEl._lazyItems = items;
+      gridEl._lazyDone = false;
+      if(idx < 2 || !libSectionObserver){
+        mountGridSection(gridEl);
+      } else {
+        libSectionObserver.observe(gridEl);
+      }
+    });
 
     const jumpNav = document.getElementById('jumpNav');
     if(presentTopics.length > 1){
@@ -5738,52 +5793,10 @@ function render(){
       });
     });
   } else {
-    gridWrap.querySelectorAll('.card').forEach(card=>{
-      card.addEventListener('click', ()=> card.classList.toggle('flipped'));
-      card.addEventListener('keydown', (e)=>{
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          card.classList.toggle('flipped');
-        }
-      });
-    });
+    wireCardGridHandlers(gridWrap);
   }
 
-  gridWrap.querySelectorAll('.star-toggle').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      const item = WORDS[+btn.dataset.idx];
-      toggleStarred(item);
-      const nowStarred = isStarred(item);
-      btn.classList.toggle('active', nowStarred);
-      btn.querySelector('svg').setAttribute('fill', nowStarred ? 'currentColor' : 'none');
-      btn.title = nowStarred ? 'Сложное слово' : 'Отметить как сложное';
-      if(onlyStarred) render();
-    });
-  });
-
-  gridWrap.querySelectorAll('.learn-toggle').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      const item = WORDS[+btn.dataset.idx];
-      toggleLearned(item);
-      const nowLearned = isLearned(item);
-      btn.classList.toggle('active', nowLearned);
-      const hostCard = btn.closest('.card') || btn.closest('.word-row-item');
-      if(hostCard) hostCard.classList.toggle('is-learned', nowLearned);
-      btn.title = nowLearned ? 'Выучено' : 'Отметить как выученное';
-      updateStats(filtered);
-      if(nowLearned) checkNewAchievements();
-      if(onlyUnlearned) render();
-    });
-  });
-
-  gridWrap.querySelectorAll('.speak-btn').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      speak(btn.dataset.example || btn.dataset.word);
-    });
-  });
+  wireCardGridHandlers(gridWrap);
 
   const quizBtn = document.getElementById('quizBtn');
   if(quizBtn) quizBtn.disabled = filtered.length < 4;
@@ -6072,20 +6085,17 @@ async function autoAiTranslate(raw){
     entryInside.innerHTML = `
       <div class="lk-top">
         <span class="lk-word">${enWord}</span>
-        <span class="lk-level lk-level-ai">✨ AI</span>
       </div>
-      <p class="lk-ru">${ruWord}</p>
-      <p class="lk-ai-disclaimer">Перевод сгенерирован автоматически и не проверялся вручную — используйте как подсказку.</p>`;
+      <p class="lk-ru">${ruWord}</p>`;
   } else {
     entryInside.innerHTML = `
       <div class="lk-top">
         <span class="lk-word">${q}</span>
-        <span class="lk-level lk-level-ai">✨ AI</span>
       </div>
       <p class="lk-ai-disclaimer">⚠️ Не получилось перевести это слово — сервисы перевода недоступны или превышен лимит запросов. Попробуйте ещё раз чуть позже.</p>`;
   }
 }
-function lkEntry(item){
+function lkEntry(item, alsoCheckAi){
   lookupCard.classList.remove('show'); lookupCard.innerHTML='';
   entryInside.classList.add('show');
   entryInside.innerHTML = `
@@ -6096,8 +6106,32 @@ function lkEntry(item){
     </div>
     <p class="lk-ru">${item.ru}</p>
     <p class="lk-ex">«${item.ex}» — ${item.exru}</p>
-    <button type="button" class="lk-open" id="lkOpenBtn">Открыть в библиотеке<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>`;
+    <div class="lk-entry-actions">
+      <button type="button" class="lk-open" id="lkOpenBtn">Открыть в библиотеке<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <button type="button" class="lk-ai-check" id="lkAiCheckBtn">✨ Проверить перевод через AI</button>
+    </div>
+    <div id="lkAiInline"></div>`;
   document.getElementById('lkOpenBtn').addEventListener('click', ()=> openLibrary({ query: item.w }));
+  document.getElementById('lkAiCheckBtn').addEventListener('click', ()=> checkAiInline(item.w));
+  if(alsoCheckAi) checkAiInline(item.w);
+}
+async function checkAiInline(word){
+  const box = document.getElementById('lkAiInline');
+  const btn = document.getElementById('lkAiCheckBtn');
+  if(!box) return;
+  if(btn){ btn.disabled = true; }
+  box.innerHTML = `<div class="lk-ai-loading-row"><span class="lk-ai-spinner"></span> Спрашиваем AI…</div>`;
+  const from = 'en', to = 'ru';
+  const cleanWord = word.replace(/^to\s+/,'');
+  let translated = null;
+  try{ translated = await tryGoogleTranslate(cleanWord, from, to); } catch(e){}
+  if(!translated){ try{ translated = await tryMyMemory(cleanWord, from, to); } catch(e){} }
+  if(translated){
+    box.innerHTML = `<div class="lk-ai-inline-card"><span class="lk-level lk-level-ai">✨ AI</span><p class="lk-ai-inline-text">AI переводит как: <b>${translated}</b></p></div>`;
+  } else {
+    box.innerHTML = `<p class="lk-ai-fail-inline">⚠️ Не удалось получить AI-перевод. Попробуйте позже.</p>`;
+  }
+  if(btn){ btn.disabled = false; }
 }
 function lkList(items){
   entryInside.classList.remove('show'); entryInside.innerHTML='';
@@ -6129,7 +6163,8 @@ function runLookup(isSubmit){
     return;
   }
   const exact = list.find(it => val(it) === needle);
-  if(exact){ lkEntry(exact); return; }
+  if(exact){ lkEntry(exact, isSubmit); return; }
+  if(isSubmit){ autoAiTranslate(raw); return; }
   lkList(list);
 }
 lookupInput.addEventListener('input', ()=> runLookup(false));
@@ -6145,75 +6180,35 @@ function loadMyList(){ try{ return JSON.parse(localStorage.getItem(MYLIST_KEY)) 
 function saveMyList(){ try{ localStorage.setItem(MYLIST_KEY, JSON.stringify(myList)); }catch(e){} }
 let myList = loadMyList();
 
-function findWordLevel(en){
-  const lower = en.toLowerCase();
-  const entry = WORDS.find(d => d.w.toLowerCase() === lower);
-  return entry ? entry.lvl : null;
-}
-
 function renderMyList(){
-  const grid = document.getElementById('mylistGrid');
   const empty = document.getElementById('mylistEmpty');
+  const statusEl = document.getElementById('mylistStatus');
   const countEl = document.getElementById('mylistReviewCount');
   const reviewBtn = document.getElementById('mylistReviewBtn');
-  if(!grid) return;
   if(!myList.length){
-    grid.innerHTML = '';
-    grid.style.display = 'none';
     if(empty) empty.style.display = 'flex';
+    if(statusEl){ statusEl.style.display = 'none'; statusEl.textContent = ''; }
     if(countEl) countEl.textContent = '';
     if(reviewBtn) reviewBtn.disabled = true;
     return;
   }
   if(empty) empty.style.display = 'none';
-  grid.style.display = 'grid';
   if(reviewBtn) reviewBtn.disabled = false;
   if(countEl) countEl.textContent = '(' + myList.length + ')';
-  grid.innerHTML = myList.map((item, i) => {
-    const lvl = findWordLevel(item.en);
-    const lvlClass = lvl ? ' lvl-' + lvl : '';
-    const badgeHtml = lvl ? `<div class="mylist-elv${lvlClass}" style="color:inherit"><span class="mylist-elv-e"></span>${lvl}</div>` : '';
-    const aiBadge = item.source === 'ai' ? '<span class="mylist-ai-badge">✨ AI</span>' : '';
-    const delay = Math.min(i * 28, 400);
-    return `
-      <div class="mylist-card" style="animation-delay:${delay}ms">
-        <button type="button" class="mylist-del" data-id="${item.id}" aria-label="Удалить слово">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-        ${aiBadge}
-        <div class="mylist-card-word">${item.en}</div>
-        <div class="mylist-card-ru">${item.ru}</div>
-        ${badgeHtml}
-      </div>
-    `;
-  }).join('');
-  grid.querySelectorAll('.mylist-del').forEach(btn=>{
-    btn.addEventListener('click', (e)=>{
-      e.stopPropagation();
-      const card = btn.closest('.mylist-card');
-      if(card){
-        card.classList.add('removing');
-        setTimeout(()=>{
-          myList = myList.filter(w => w.id !== btn.dataset.id);
-          saveMyList();
-          renderMyList();
-        }, 200);
-      } else {
-        myList = myList.filter(w => w.id !== btn.dataset.id);
-        saveMyList();
-        renderMyList();
-      }
-    });
-  });
+  if(statusEl){
+    statusEl.style.display = 'block';
+    const learnedCount = myList.filter(w => w.learned).length;
+    statusEl.textContent = `Слов добавлено: ${myList.length}` + (learnedCount ? ` · выучено: ${learnedCount}` : '');
+  }
 }
 
 function addToMyList(en, ru, source){
   const exists = myList.some(w => w.en.toLowerCase() === en.toLowerCase());
-  if(exists){ showToast('📌', 'Уже в списке', en + ' — это слово уже добавлено'); return; }
-  myList.unshift({ id: 'w' + Date.now() + Math.random().toString(36).slice(2,7), en, ru, source: source || 'dict', ts: Date.now() });
+  if(exists){ showToast('📌', 'Уже добавлено', en + ' — это слово уже есть в повторениях'); return; }
+  myList.unshift({ id: 'w' + Date.now() + Math.random().toString(36).slice(2,7), en, ru, source: source || 'dict', learned: false, ts: Date.now() });
   saveMyList();
   renderMyList();
-  showToast('✅', 'Добавлено', en + ' теперь в «Моём списке»');
+  showToast('✅', 'Добавлено', en + ' теперь в «Повторениях»');
 }
 
 /* -- add-word modal -- */
@@ -6322,8 +6317,6 @@ let mylistReviewFlipped = false;
 const mylistReviewOv = document.getElementById('mylistReviewOv');
 const mylistReviewBtn = document.getElementById('mylistReviewBtn');
 if(mylistReviewBtn) mylistReviewBtn.addEventListener('click', startMylistReview);
-const mylistReviewClose = document.getElementById('mylistReviewClose');
-if(mylistReviewClose) mylistReviewClose.addEventListener('click', ()=>{ mylistReviewOv.hidden = true; });
 
 function startMylistReview(){
   if(!myList.length || !mylistReviewOv) return;
@@ -6332,58 +6325,64 @@ function startMylistReview(){
   mylistReviewOv.classList.add('show');
   renderMylistFlash();
 }
+function closeMylistReview(){
+  if(!mylistReviewOv) return;
+  mylistReviewOv.classList.remove('show');
+  setTimeout(()=>{ mylistReviewOv.hidden = true; }, 190);
+  renderMyList();
+}
 function renderMylistFlash(){
   const flash = document.getElementById('mylistFlash');
   const progress = document.getElementById('mylistReviewProgress');
   const actions = document.getElementById('mylistReviewActions');
+  const learnedRow = document.getElementById('mylistLearnedRow');
   if(mylistReviewIdx >= myList.length){
     flash.innerHTML = `<div class="mylist-done">🎉 Вы повторили все слова!</div>`;
-    if(progress){ progress.textContent = ''; progress.classList.remove('ml-progress-anim'); }
-    actions.innerHTML = `<button type="button" class="start-btn" id="mylistReviewAgain">Повторить ещё раз</button>`;
+    if(progress) progress.textContent = '';
+    if(learnedRow) learnedRow.innerHTML = '';
+    actions.innerHTML = `
+      <button type="button" class="start-btn" id="mylistReviewAgain">Повторить ещё раз</button>
+      <button type="button" class="tab" id="mylistReviewCloseBtn">Закрыть</button>`;
     document.getElementById('mylistReviewAgain').addEventListener('click', startMylistReview);
+    document.getElementById('mylistReviewCloseBtn').addEventListener('click', closeMylistReview);
     return;
   }
   const item = myList[mylistReviewIdx];
   mylistReviewFlipped = false;
-  if(progress){
-    progress.textContent = `${mylistReviewIdx + 1} из ${myList.length}`;
-    progress.classList.remove('ml-progress-anim');
-    void progress.offsetWidth;
-    progress.classList.add('ml-progress-anim');
-  }
+  if(progress) progress.textContent = `${mylistReviewIdx + 1} из ${myList.length}`;
   flash.innerHTML = `
     <div class="mylist-flash-card" id="mylistFlashCard">
-      <div class="mylist-flash-card-inner">
-        <div class="mylist-flash-face mylist-flash-front">
-          <div class="mylist-flash-word">${item.en}</div>
-          <div class="mylist-flash-hint">Нажмите, чтобы увидеть перевод</div>
-        </div>
-        <div class="mylist-flash-face back">
-          <div class="mylist-flash-ru">${item.ru}</div>
-          <div class="mylist-flash-hint">Нажмите, чтобы вернуться к слову</div>
-        </div>
-      </div>
+      <div class="mylist-flash-word">${item.en}</div>
+      <div class="mylist-flash-ru" id="mylistFlashRu" hidden>${item.ru}</div>
+      <div class="mylist-flash-hint" id="mylistFlashHint">Нажмите, чтобы увидеть перевод</div>
     </div>`;
-  document.getElementById('mylistFlashCard').addEventListener('click', (e)=>{
+  document.getElementById('mylistFlashCard').addEventListener('click', ()=>{
     mylistReviewFlipped = !mylistReviewFlipped;
-    e.currentTarget.classList.toggle('flipped', mylistReviewFlipped);
+    document.getElementById('mylistFlashRu').hidden = !mylistReviewFlipped;
+    document.getElementById('mylistFlashHint').hidden = mylistReviewFlipped;
+    renderMylistLearnedRow(item);
   });
+  if(learnedRow) learnedRow.innerHTML = '';
   actions.innerHTML = `
-    <button type="button" class="tab" id="mylistSkip">Пропустить</button>
-    <button type="button" class="start-btn" id="mylistNext">Дальше →</button>`;
-  const nextCard = ()=>{
-    const card = document.getElementById('mylistFlashCard');
-    const nextBtn = document.getElementById('mylistNext');
-    const skipBtn = document.getElementById('mylistSkip');
-    if(card && !card.classList.contains('leaving')){
-      card.classList.add('leaving');
-      if(nextBtn) nextBtn.disabled = true;
-      if(skipBtn) skipBtn.disabled = true;
-      setTimeout(()=>{ mylistReviewIdx++; renderMylistFlash(); }, 180);
-    }
-  };
-  document.getElementById('mylistNext').addEventListener('click', nextCard);
-  document.getElementById('mylistSkip').addEventListener('click', nextCard);
+    <button type="button" class="start-btn" id="mylistNext">Дальше →</button>
+    <button type="button" class="tab" id="mylistReviewCloseBtn">Закрыть</button>`;
+  document.getElementById('mylistNext').addEventListener('click', ()=>{ mylistReviewIdx++; renderMylistFlash(); });
+  document.getElementById('mylistReviewCloseBtn').addEventListener('click', closeMylistReview);
+}
+function renderMylistLearnedRow(item){
+  const learnedRow = document.getElementById('mylistLearnedRow');
+  if(!learnedRow) return;
+  const isLearnedWord = !!item.learned;
+  learnedRow.innerHTML = `
+    <button type="button" class="mylist-learned-btn${isLearnedWord ? ' active' : ''}" id="mylistLearnedBtn">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      ${isLearnedWord ? 'Отмечено как выученное' : 'Отметить как выученное'}
+    </button>`;
+  document.getElementById('mylistLearnedBtn').addEventListener('click', ()=>{
+    item.learned = !item.learned;
+    saveMyList();
+    renderMylistLearnedRow(item);
+  });
 }
 
 const statWords = document.getElementById('statWords');
