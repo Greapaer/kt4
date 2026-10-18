@@ -1086,6 +1086,54 @@
   @media (max-width:780px){ .srch-box{margin:22px 0 26px;padding:26px 22px;} .dict-block-title{font-size:clamp(22px,6vw,28px);} }
   @media (max-width:640px){ .srch-box{margin:18px 0 24px;padding:22px 16px;} .dict-search .lk-entry{max-height:62vh;} .dict-stats{gap:22px;} .dict-stat-val{font-size:27px;} }
   @media (max-width:420px){ .srch-box .lk-row{flex-wrap:wrap;} .srch-box .lk-row button{flex:1 1 100%;} }
+
+  /* ===== catalog: search only ===== */
+  #library.search-only .view-switch,
+  #library.search-only .filter-toggle,
+  #library.search-only .quiz-btn,
+  #library.search-only .tabs-group,
+  #library.search-only .selection-pill,
+  #library.search-only .jump-nav,
+  #library.search-only .stats{display:none !important;}
+  #library.search-only .controls{display:block;}
+  #library.search-only .search-wrap{width:100%;max-width:none;flex:1 1 100%;}
+  #library.search-only .search-wrap input{font-size:16px;}
+
+  /* ===== repetitions: list with "learned" button ===== */
+  .mylist-card{display:flex;flex-direction:column;gap:10px;min-width:0;}
+  .mylist-card-word{padding-right:0;overflow-wrap:anywhere;}
+  .mylist-card-ru{overflow-wrap:anywhere;flex:1;}
+  .mylist-learn-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;align-self:stretch;min-height:40px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;color:var(--good);background:var(--good-dim);border:1px solid transparent;border-radius:12px;padding:8px 12px;cursor:pointer;transition:filter .15s,transform .1s;}
+  .mylist-learn-btn:hover{filter:brightness(.96);}
+  .mylist-learn-btn:active{transform:scale(.97);}
+  .mylist-learn-btn svg{width:15px;height:15px;flex-shrink:0;}
+  .mylist-learned-btn{min-height:44px;}
+  .mylist-learned-btn.remove{color:var(--good);background:var(--good-dim);border-color:transparent;}
+
+  /* ===== mobile fixes ===== */
+  html,body{max-width:100%;overflow-x:clip;}
+  img,svg,video{max-width:100%;}
+  @media(max-width:430px){
+    .chip-res.xp-chip{display:none !important;}
+  }
+  @media(max-width:640px){
+    .topbar{gap:6px;}
+    .logo-text{font-size:15px;}
+    .chip-res{padding:6px 10px;font-size:13px;}
+    .mylist-grid{grid-template-columns:1fr;}
+    .mylist-actions{margin:16px 0 18px;}
+    .mylist-flash-card{padding:36px 16px;}
+    .mylist-flash-word{font-size:26px;overflow-wrap:anywhere;}
+    .mylist-review-actions{flex-wrap:wrap;}
+    .modal-box{max-width:calc(100vw - 24px);}
+    .tab,.start-btn{min-height:40px;}
+    .icon-toggle{flex-shrink:0;min-height:0;}
+    .mylist-status{margin:4px 0 14px;}
+    input,select,textarea{font-size:16px;} /* no zoom-in on iOS focus */
+  }
+  @supports (height:100dvh){
+    body{min-height:100dvh;}
+  }
 </style>
 </head>
 <body>
@@ -1400,7 +1448,7 @@
     <div>
       <span class="tile-cap">Повторения</span>
       <h2 class="tile-title" style="margin:4px 0 6px;">Слова для повторения</h2>
-      <p class="mylist-sub">Добавляйте слова, которые не хотите забыть, а когда будет удобно — нажимайте «Повторить» и проходите их карточками.</p>
+      <p class="mylist-sub">Добавляйте слова, которые не хотите забыть, и повторяйте их карточками. Выучили слово — нажмите «Выучил», и оно исчезнет из списка.</p>
     </div>
   </div>
   <div class="mylist-actions">
@@ -1408,6 +1456,7 @@
     <button type="button" class="start-btn mylist-review-btn" id="mylistReviewBtn">▶ Повторить <span id="mylistReviewCount"></span></button>
   </div>
   <p class="mylist-status" id="mylistStatus"></p>
+  <div class="mylist-grid" id="mylistList"></div>
   <div class="mylist-empty" id="mylistEmpty">
     <span class="mylist-empty-icon">📌</span>
     <p>Пока пусто. Добавьте первое слово — и оно будет ждать вас здесь для повторения.</p>
@@ -4198,6 +4247,7 @@ function dw(it){
 let activeLvl = "все";
 let activeCat = "все";
 let awaitingTopic = false;
+let catalogSearchOnly = false;
 let query = "";
 let pickerLevel = null;
 let hideFilterTabs = false;
@@ -4714,6 +4764,9 @@ function openLibrary(opts){
   activeLvl = opts.lvl || "все";
   activeCat = opts.cat || (opts.lvl ? null : "все");
   awaitingTopic = false;
+  // catalog opened without a level/topic -> show ONLY the search, no word list
+  catalogSearchOnly = !opts.lvl && !opts.cat;
+  libEl.classList.toggle('search-only', catalogSearchOnly);
   query = opts.query || "";
   document.getElementById('search').value = query;
 
@@ -5689,6 +5742,18 @@ function mountGridSection(gridEl){
 function render(){
   const q = query.trim().toLowerCase();
 
+  if(catalogSearchOnly && !q){
+    document.getElementById('jumpNav').classList.remove('show');
+    document.getElementById('jumpNav').innerHTML = '';
+    gridWrap.innerHTML = `<div class="topic-prompt">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <p>Введите слово или перевод в строке поиска — и найдёте нужное.</p>
+    </div>`;
+    emptyEl.style.display = 'none';
+    updateStats([]);
+    return;
+  }
+
   if(awaitingTopic && !q){
     document.getElementById('jumpNav').classList.remove('show');
     document.getElementById('jumpNav').innerHTML = '';
@@ -6180,7 +6245,44 @@ function loadMyList(){ try{ return JSON.parse(localStorage.getItem(MYLIST_KEY)) 
 function saveMyList(){ try{ localStorage.setItem(MYLIST_KEY, JSON.stringify(myList)); }catch(e){} }
 let myList = loadMyList();
 
+function escHtml(t){ return String(t==null?'':t).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function removeFromMyList(id){
+  const w = myList.find(x => x.id === id);
+  if(!w) return null;
+  myList = myList.filter(x => x.id !== id);
+  saveMyList();
+  return w;
+}
+function renderMyListCards(){
+  const box = document.getElementById('mylistList');
+  if(!box) return;
+  box.innerHTML = myList.map(w => `
+    <div class="mylist-card" data-id="${escHtml(w.id)}">
+      <div>
+        <div class="mylist-card-word">${escHtml(w.en)}</div>
+        <div class="mylist-card-ru">${escHtml(w.ru)}</div>
+      </div>
+      <button type="button" class="mylist-learn-btn" data-learn="${escHtml(w.id)}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Выучил
+      </button>
+    </div>`).join('');
+}
+(function(){
+  const box = document.getElementById('mylistList');
+  if(!box) return;
+  box.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-learn]');
+    if(!btn) return;
+    const w = removeFromMyList(btn.dataset.learn);
+    if(!w) return;
+    renderMyList();
+    showToast('🎉', 'Выучено', w.en + ' убрано из повторений');
+  });
+})();
+
 function renderMyList(){
+  renderMyListCards();
   const empty = document.getElementById('mylistEmpty');
   const statusEl = document.getElementById('mylistStatus');
   const countEl = document.getElementById('mylistReviewCount');
@@ -6352,17 +6454,16 @@ function renderMylistFlash(){
   if(progress) progress.textContent = `${mylistReviewIdx + 1} из ${myList.length}`;
   flash.innerHTML = `
     <div class="mylist-flash-card" id="mylistFlashCard">
-      <div class="mylist-flash-word">${item.en}</div>
-      <div class="mylist-flash-ru" id="mylistFlashRu" hidden>${item.ru}</div>
+      <div class="mylist-flash-word">${escHtml(item.en)}</div>
+      <div class="mylist-flash-ru" id="mylistFlashRu" hidden>${escHtml(item.ru)}</div>
       <div class="mylist-flash-hint" id="mylistFlashHint">Нажмите, чтобы увидеть перевод</div>
     </div>`;
   document.getElementById('mylistFlashCard').addEventListener('click', ()=>{
     mylistReviewFlipped = !mylistReviewFlipped;
     document.getElementById('mylistFlashRu').hidden = !mylistReviewFlipped;
     document.getElementById('mylistFlashHint').hidden = mylistReviewFlipped;
-    renderMylistLearnedRow(item);
   });
-  if(learnedRow) learnedRow.innerHTML = '';
+  renderMylistLearnedRow(item);
   actions.innerHTML = `
     <button type="button" class="start-btn" id="mylistNext">Дальше →</button>
     <button type="button" class="tab" id="mylistReviewCloseBtn">Закрыть</button>`;
@@ -6372,16 +6473,18 @@ function renderMylistFlash(){
 function renderMylistLearnedRow(item){
   const learnedRow = document.getElementById('mylistLearnedRow');
   if(!learnedRow) return;
-  const isLearnedWord = !!item.learned;
   learnedRow.innerHTML = `
-    <button type="button" class="mylist-learned-btn${isLearnedWord ? ' active' : ''}" id="mylistLearnedBtn">
+    <button type="button" class="mylist-learned-btn remove" id="mylistLearnedBtn">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-      ${isLearnedWord ? 'Отмечено как выученное' : 'Отметить как выученное'}
+      Выучил — убрать из списка
     </button>`;
   document.getElementById('mylistLearnedBtn').addEventListener('click', ()=>{
-    item.learned = !item.learned;
-    saveMyList();
-    renderMylistLearnedRow(item);
+    const w = removeFromMyList(item.id);
+    if(!w) return;
+    showToast('🎉', 'Выучено', w.en + ' убрано из повторений');
+    // the list shifted left, so the same index now points at the next word
+    renderMyList();
+    renderMylistFlash();
   });
 }
 
