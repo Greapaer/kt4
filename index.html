@@ -1111,10 +1111,13 @@
   .mylist-learned-btn.remove{color:var(--good);background:var(--good-dim);border-color:transparent;}
 
   /* ===== mobile fixes ===== */
-  html,body{max-width:100%;overflow-x:clip;}
   img,svg,video{max-width:100%;}
   @media(max-width:430px){
     .chip-res.xp-chip{display:none !important;}
+  }
+  @media(max-width:640px){
+    .bottom-nav{position:fixed !important;left:0 !important;right:0 !important;bottom:0 !important;top:auto !important;
+      -webkit-transform:translateZ(0);transform:translateZ(0);z-index:500;}
   }
   @media(max-width:640px){
     .topbar{gap:6px;}
@@ -1130,9 +1133,6 @@
     .icon-toggle{flex-shrink:0;min-height:0;}
     .mylist-status{margin:4px 0 14px;}
     input,select,textarea{font-size:16px;} /* no zoom-in on iOS focus */
-  }
-  @supports (height:100dvh){
-    body{min-height:100dvh;}
   }
 </style>
 </head>
@@ -6241,7 +6241,18 @@ lookupInput.addEventListener('keydown', (e)=>{
 
 /* ---------- Мой список: personal review list ---------- */
 const MYLIST_KEY = 'lexio_mylist_v1';
-function loadMyList(){ try{ return JSON.parse(localStorage.getItem(MYLIST_KEY)) || []; }catch(e){ return []; } }
+function loadMyList(){
+  try{
+    const raw = JSON.parse(localStorage.getItem(MYLIST_KEY));
+    if(!Array.isArray(raw)) return [];
+    return raw.filter(w => w && (w.en || w.ru)).map((w,i)=>({
+      ...w,
+      en: w.en || '',
+      ru: w.ru || '',
+      id: w.id || ('w' + Date.now() + '_' + i + Math.random().toString(36).slice(2,6))
+    }));
+  }catch(e){ return []; }
+}
 function saveMyList(){ try{ localStorage.setItem(MYLIST_KEY, JSON.stringify(myList)); }catch(e){} }
 let myList = loadMyList();
 
@@ -6274,10 +6285,13 @@ function renderMyListCards(){
   box.addEventListener('click', (e)=>{
     const btn = e.target.closest('[data-learn]');
     if(!btn) return;
+    e.preventDefault();
+    const card = btn.closest('.mylist-card');
     const w = removeFromMyList(btn.dataset.learn);
     if(!w) return;
+    if(card) card.remove();
     renderMyList();
-    showToast('🎉', 'Выучено', w.en + ' убрано из повторений');
+    try{ showToast('🎉', 'Выучено', w.en + ' убрано из повторений'); }catch(err){}
   });
 })();
 
