@@ -154,3 +154,59 @@ footer{
         font-size: 28px;
     }
 }
+/* ===== Повторения ===== */
+#mylistView .lib-header{padding:32px 0 0}
+#mylistView .tile-title{font-size:26px;margin:4px 0 8px}
+.mylist-sub{font-size:14px;max-width:460px;color:var(--ink-dim)}
+
+.mylist-actions{display:flex;gap:10px;margin:22px 0 14px;flex-wrap:wrap}
+.mylist-actions .start-btn{border-radius:14px;padding:14px 24px;font-size:14px;font-weight:700;box-shadow:none}
+.mylist-actions .mylist-review-btn{background:var(--amber)}
+.mylist-actions .mylist-review-btn:hover{box-shadow:0 10px 22px -12px var(--amber)}
+#mylistAddBtn{background:var(--card);color:var(--ink);border:1.5px solid var(--rule-strong)}
+#mylistAddBtn:hover{border-color:var(--amber);color:var(--amber);filter:none;transform:none}
+.mylist-review-btn:disabled{background:var(--rule);color:var(--ink-faint);opacity:1}
+
+.mylist-status{display:inline-flex;align-items:center;gap:6px;margin:0 0 16px;padding:6px 12px;border-radius:99px;background:var(--card);border:1px solid var(--rule);font-size:12.5px;color:var(--ink-dim)}
+.mylist-status b{color:var(--ink)}
+
+.mylist-grid{display:flex;flex-direction:column;gap:8px}
+.mylist-card{flex-direction:row;align-items:center;justify-content:space-between;gap:14px;padding:14px 14px 14px 18px;border-radius:16px}
+.mylist-card:hover{transform:none;border-color:var(--rule-strong)}
+.mylist-card-word{font-size:17px;font-weight:800;margin:0 0 2px;padding:0}
+.mylist-card-ru{font-size:13.5px;color:var(--ink-dim);flex:none}
+.mylist-learn-btn{align-self:center;min-height:38px;padding:0 14px;border-radius:99px;font-size:12.5px;background:transparent;color:var(--good);border:1.5px solid var(--good);flex-shrink:0}
+.mylist-learn-btn:hover{background:var(--good);color:#fff;filter:none}
+
+.mylist-empty{padding:56px 20px;gap:14px}
+.mylist-empty-icon{width:76px;height:76px;border-radius:50%;background:var(--amber-dim);display:grid;place-items:center;font-size:32px}
+.mylist-empty p{font-size:14px;color:var(--ink-dim)}
+.mylist-empty .start-btn{border-radius:14px}
+
+.mylist-add-search input{border-radius:14px;padding:13px 16px;background:var(--panel)}
+.mylist-add-search button{border-radius:14px}
+.mylist-pick{border-radius:14px;padding:12px 16px}
+.mylist-pick-add{background:var(--teal-dim);padding:4px 10px;border-radius:99px}
+
+.mylist-review-inner{padding:28px 24px;border-radius:28px;width:min(460px,100%)}
+#mylistReviewProgress{display:flex;flex-direction:column;gap:10px;align-items:center;margin:0 0 4px}
+.mylist-bar{display:block;width:100%;height:6px;border-radius:99px;background:var(--rule);overflow:hidden}
+.mylist-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));border-radius:99px;transition:width .35s ease}
+.mylist-flash{margin:18px 0 14px}
+.mylist-flash-card{min-height:220px;border-radius:24px;padding:36px 24px;border:1.5px solid var(--rule);background:linear-gradient(160deg,var(--card),var(--panel));box-shadow:0 18px 40px -26px rgba(0,0,0,.45)}
+.mylist-flash-card:hover{border-color:var(--amber)}
+.mylist-flash-word{font-size:34px;letter-spacing:-.01em}
+.mylist-flash-ru{font-size:22px;color:var(--amber)}
+.mylist-learned-row{display:block;margin:0 0 12px}
+.mylist-learned-btn,.mylist-learned-btn.remove{width:100%;justify-content:center;border-radius:14px;min-height:46px;background:transparent;color:var(--good);border:1.5px solid var(--good)}
+.mylist-learned-btn.remove:hover{background:var(--good);color:#fff}
+.mylist-review-actions{flex-direction:column;gap:8px}
+.mylist-review-actions .start-btn{width:100%;justify-content:center;border-radius:14px}
+.mylist-review-actions .tab{width:100%;border:none;color:var(--ink-faint);padding:10px}
+.mylist-review-actions .tab:hover{color:var(--ink)}
+
+@media(max-width:560px){
+  .mylist-actions{flex-direction:column}
+  .mylist-actions .start-btn{width:100%;justify-content:center}
+  .mylist-grid{grid-template-columns:none}
+}
